@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import NavButton from './NavButton.vue';
+import Logo from './Logo.vue'
+import NavButton from '../buttons/SecondaryButton.vue'
 </script>
 
 <template>
-  <nav class="flex gap-x-2">
-    <NavButton>
-      <RouterLink to="/">Home</RouterLink>
-    </NavButton>
-    <NavButton>
-      <RouterLink to="/fail">Fail</RouterLink>
-    </NavButton>
+  <nav class="flex justify-center align-middle flex-wrap gap-x-10">
+    <ul>
+      <NavButton>
+        <RouterLink to="/create">Create your own Huxle</RouterLink>
+      </NavButton>
+    </ul>
   </nav>
 </template>
