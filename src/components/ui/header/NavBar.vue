@@ -8,7 +8,9 @@ import NavButton from '../buttons/SecondaryButton.vue'
   <nav class="flex justify-center align-middle flex-wrap gap-x-10">
     <ul>
       <NavButton>
-        <RouterLink to="/create">Create your own Huxle</RouterLink>
+        <RouterLink to="/create">{{
+          $t('header.link.create.label')
+        }}</RouterLink>
       </NavButton>
     </ul>
   </nav>

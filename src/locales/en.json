@@ -1,3 +1,22 @@
 {
-  "greeting": "Hello, world!"
+  "header": {
+    "locale": {
+      "german": "German",
+      "english": "English",
+      "toggle": "Auf Deutsch wechseln"
+    },
+    "link": {
+      "create": {
+        "label": "Create your own Huxle"
+      }
+    }
+  },
+  "footer": {
+    "label": "Made by Andrea, Daniel and Lisa "
+  },
+  "error": {
+    "not-found": {
+      "text": "This page does not exist."
+    }
+  }
 }

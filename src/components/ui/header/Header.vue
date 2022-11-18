@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Logo from './Logo.vue'
 import NavBar from './NavBar.vue'
-import LanguageSwitcher from './LanguageSwitcher.vue'
+import LocaleSwitcher from './LocaleSwitcher.vue'
 </script>
 
 <template>
@@ -10,6 +10,6 @@ import LanguageSwitcher from './LanguageSwitcher.vue'
   >
     <Logo />
     <NavBar />
-    <LanguageSwitcher />
+    <LocaleSwitcher />
   </header>
 </template>

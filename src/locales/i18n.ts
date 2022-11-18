@@ -1,13 +1,17 @@
-import { createI18n, type I18n } from 'vue-i18n'
+import { createI18n } from 'vue-i18n'
 
-export const SUPPORT_LOCALES = ['en', 'de']
+import en from '@/locales/en.json'
+import de from '@/locales/de.json'
 
-export function setupI18n(options = { locale: 'en' }) {
-  const i18n = createI18n(options)
-  setI18nLanguate(i18n, options.locale)
-}
+export const defaultLocale = 'en'
+export type LocaleOption = 'en' | 'de'
+export const localeOptions: LocaleOption[] = [defaultLocale, 'de']
 
-export function setI18nLanguate(i18n: I18n, locale: string) {
-  if (i18n.mode === 'legacy') {
-  }
-}
+export const i18n = createI18n({
+  locale: defaultLocale,
+  fallbackLocale: 'en',
+  messages: {
+    en,
+    de,
+  },
+})
