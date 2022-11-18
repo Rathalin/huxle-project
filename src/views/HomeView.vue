@@ -1,3 +1,3 @@
 <template>
-  <h1>HomeView works!</h1>
+  <h1>{{ $t('greeting') }}</h1>
 </template>

@@ -3,6 +3,7 @@
     "vue.vscode-typescript-vue-plugin",
     "vue.volar",
     "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "lokalise.i18n-ally"
   ]
 }
