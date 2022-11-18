@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="border-1">
+  <div class="rounded-md">
     <slot></slot>
   </div>
 </template>

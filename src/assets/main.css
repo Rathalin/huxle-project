@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#app {
+  background-color: #374151;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
