@@ -1,5 +1,13 @@
+<script setup lang="ts">
+import LetterButton from '@/components/ui/main/game/LetterButton.vue'
+</script>
+
 <template>
-  <div class="flex flex-col items-center house">🏡</div>
+  <div class="flex justify-center gap-2">
+    <LetterButton letter="A" state="incorrect" />
+    <LetterButton letter="B" state="partlyCorrect" />
+    <LetterButton letter="C" state="correct" />
+  </div>
 </template>
 
 <style scoped>
