@@ -18,5 +18,27 @@
     "not-found": {
       "text": "This page does not exist."
     }
+  },
+  "view": {
+    "create": {
+      "heading": {
+        "text": "Create your own"
+      },
+      "input": {
+        "en": {
+          "label": "Your word in English"
+        },
+        "de": {
+          "label": "Your word in German"
+        },
+        "error": {
+          "required": "This field is required.",
+          "length": "The word must have {length} letters."
+        }
+      },
+      "submit": {
+        "label": "Create"
+      }
+    }
   }
 }

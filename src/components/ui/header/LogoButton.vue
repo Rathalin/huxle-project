@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import SecondaryButton from '../buttons/SecondaryButton.vue'
+import LogoText from '../logo/LogoText.vue'
 </script>
 
 <template>
   <RouterLink to="/">
     <SecondaryButton>
-      <span class="pt-1 font-special text-2xl uppercase">Huxle</span>
+      <LogoText class="pt-1 text-2xl" />
     </SecondaryButton>
   </RouterLink>
 </template>

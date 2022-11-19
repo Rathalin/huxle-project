@@ -2,10 +2,10 @@
 
 #app {
   background-color: theme(colors.graphite.800);
+  color: theme(textColor.normal);
   font-family: theme(fontFamily.primary);
   line-height: initial;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  color: #dddddd;
 }

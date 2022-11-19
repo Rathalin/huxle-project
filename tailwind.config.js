@@ -5,23 +5,29 @@ module.exports = {
     extend: {
       colors: {
         prime: {
-          500: 'hwb(27 18% 4%)',
-          600: 'hwb(27 33% 0%)',
+          500: 'hsl(27, 91%, 57%)',
+          600: 'hsl(27, 100%, 67%)',
         },
         graphite: {
-          400: 'hwb(0 40% 60%)',
-          500: 'hwb(0 29% 71%)',
-          600: '#363636',
-          800: '#212121',
-          900: '#171717',
+          400: 'hsl(0, 0%, 40%)',
+          500: 'hsl(0, 0%, 29%)',
+          600: 'hsl(0, 0%, 21%)',
+          800: 'hsl(0, 0%, 13%)',
+          900: 'hsl(0, 0%, 9%)',
         },
         letter: {
-          incorrect: '#333333',
-          incorrectHover: 'hwb(0 30% 70%)',
-          partlyCorrect: '#76761c',
-          partlyCorrectHover: '#abab29',
-          correct: '#317e0f',
-          correctHover: '#43ad14',
+          incorrect: 'hsl(0, 0%, 20%)',
+          incorrectHover: 'hsl(0, 0%, 30%)',
+          partlyCorrect: 'hsl(60, 62%, 29%)',
+          partlyCorrectHover: 'hsl(60, 61%, 42%)',
+          correct: 'hsl(102, 79%, 28%)',
+          correctHover: 'hsl(102, 79%, 38%)',
+        },
+      },
+      textColor: {
+        normal: 'hsl(0, 0%, 87%)',
+        error: {
+          normal: 'hsl(0, 100%, 66%)',
         },
       },
       fontFamily: {

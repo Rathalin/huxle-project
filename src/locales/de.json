@@ -18,5 +18,27 @@
     "not-found": {
       "text": "Diese Seite existiert nicht."
     }
+  },
+  "view": {
+    "create": {
+      "heading": {
+        "text": "Erstelle dein eigenes"
+      },
+      "input": {
+        "en": {
+          "label": "Dein Word auf Englisch"
+        },
+        "de": {
+          "label": "Dein Wort auf Deutsch"
+        },
+        "error": {
+          "required": "Diese Feld ist verpflichtend.",
+          "length": "Das Word muss {length} Buchstaben haben."
+        }
+      },
+      "submit": {
+        "label": "Erstellen"
+      }
+    }
   }
 }
