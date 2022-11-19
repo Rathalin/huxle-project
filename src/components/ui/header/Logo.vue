@@ -3,9 +3,11 @@ import SecondaryButton from '../buttons/SecondaryButton.vue'
 </script>
 
 <template>
-  <div class="uppercase">
-    <RouterLink to="/">
-      <SecondaryButton>Huxle</SecondaryButton>
-    </RouterLink>
-  </div>
+  <RouterLink to="/">
+    <SecondaryButton>
+      <span class="pt-1 font-special text-2xl uppercase">Huxle</span>
+    </SecondaryButton>
+  </RouterLink>
 </template>
+
+<style scoped></style>

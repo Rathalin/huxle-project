@@ -2,7 +2,7 @@
 
 <template>
   <button
-    class="hover:bg-graphite-600 rounded-full px-4 py-1 transition-colors duration-200"
+    class="hover:bg-graphite-600 rounded-full px-4 py-1 transition-colors duration-200 flex gap-1"
   >
     <slot></slot>
   </button>

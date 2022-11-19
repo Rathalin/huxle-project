@@ -4,7 +4,9 @@ import NavButton from './NavButton.vue'
 </script>
 
 <template>
-  <nav class="flex justify-center align-middle flex-wrap gap-x-10">
+  <nav
+    class="flex justify-start sm:justify-center items-center flex-wrap gap-x-10"
+  >
     <NavButton to="/create" :label="$t('header.link.create.label')" />
   </nav>
 </template>
