@@ -4,8 +4,8 @@ import SecondaryButton from '../buttons/SecondaryButton.vue'
 
 <template>
   <div class="uppercase">
-    <SecondaryButton>
-      <RouterLink to="/">Huxle</RouterLink>
-    </SecondaryButton>
+    <RouterLink to="/">
+      <SecondaryButton>Huxle</SecondaryButton>
+    </RouterLink>
   </div>
 </template>
