@@ -4,7 +4,7 @@ import LogoText from '../logo/LogoText.vue'
 </script>
 
 <template>
-  <RouterLink to="/">
+  <RouterLink to="/game">
     <SecondaryButton>
       <LogoText class="pt-1 text-2xl" />
     </SecondaryButton>

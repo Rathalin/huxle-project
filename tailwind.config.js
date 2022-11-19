@@ -16,12 +16,22 @@ module.exports = {
           900: 'hsl(0, 0%, 9%)',
         },
         letter: {
-          incorrect: 'hsl(0, 0%, 20%)',
-          incorrectHover: 'hsl(0, 0%, 30%)',
-          partlyCorrect: 'hsl(60, 62%, 29%)',
-          partlyCorrectHover: 'hsl(60, 61%, 42%)',
-          correct: 'hsl(102, 79%, 28%)',
-          correctHover: 'hsl(102, 79%, 38%)',
+          unset: {
+            normal: 'hsl(0, 0%, 40%)',
+            hover: 'hsl(0, 0%, 50%)',
+          },
+          incorrect: {
+            normal: 'hsl(0, 0%, 20%)',
+            hover: 'hsl(0, 0%, 30%)',
+          },
+          partlyCorrect: {
+            normal: 'hsl(60, 62%, 29%)',
+            hover: 'hsl(60, 61%, 42%)',
+          },
+          correct: {
+            normal: 'hsl(102, 79%, 28%)',
+            hover: 'hsl(102, 79%, 38%)',
+          },
         },
       },
       textColor: {

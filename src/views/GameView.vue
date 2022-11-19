@@ -1,18 +1,9 @@
 <script setup lang="ts">
-import LetterButton from '@/components/ui/main/game/LetterButton.vue'
+import Board from '@/components/ui/main/game/Board.vue'
 </script>
 
 <template>
-  <div class="flex justify-center gap-2">
-    <LetterButton letter="A" state="incorrect" />
-    <LetterButton letter="B" state="partlyCorrect" />
-    <LetterButton letter="C" state="correct" />
+  <div class="flex flex-col items-center">
+    <Board word="huxle" />
   </div>
 </template>
-
-<style scoped>
-div.house {
-  font-size: 20ch;
-  line-height: 100%;
-}
-</style>
