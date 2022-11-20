@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import LogoButton from './LogoButton.vue'
 import NavBar from './NavBar.vue'
-import LanguageSwitcher from './LanguageSwitcher.vue'
+import LocaleSwitcher from './LocaleSwitcher.vue'
 </script>
 
 <template>
@@ -12,6 +12,6 @@ import LanguageSwitcher from './LanguageSwitcher.vue'
     <NavBar
       class="w-9/12 sm:w-6/12 flex justify-start sm:justify-center items-center"
     />
-    <LanguageSwitcher class="w-3/12 flex justify-end items-center" />
+    <LocaleSwitcher class="w-3/12 flex justify-end items-center" />
   </header>
 </template>
