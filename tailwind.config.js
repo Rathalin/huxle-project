@@ -21,11 +21,11 @@ module.exports = {
             normal: 'hsl(0, 0%, 40%)',
             hover: 'hsl(0, 0%, 50%)',
           },
-          incorrect: {
+          absent: {
             normal: 'hsl(0, 0%, 20%)',
             hover: 'hsl(0, 0%, 30%)',
           },
-          partlyCorrect: {
+          present: {
             normal: 'hsl(60, 62%, 29%)',
             hover: 'hsl(60, 61%, 42%)',
           },

@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { computed } from '@vue/reactivity'
+import type { LetterStateOption } from './letter-state'
 
-export type LetterStateOption =
-  | 'unset'
-  | 'incorrect'
-  | 'partlyCorrect'
-  | 'correct'
 export interface LetterState {
   letter?: string
   state: LetterStateOption
@@ -13,11 +9,8 @@ export interface LetterState {
 
 const stateClass = {
   unset: ['bg-letter-unset-normal', 'hover:bg-letter-unset-hover'],
-  incorrect: ['bg-letter-incorrect-normal', 'hover:bg-letter-incorrect-hover'],
-  partlyCorrect: [
-    'bg-letter-partlyCorrect-normal',
-    'hover:bg-letter-partlyCorrect-hover',
-  ],
+  absent: ['bg-letter-absent-normal', 'hover:bg-letter-absent-hover'],
+  present: ['bg-letter-present-normal', 'hover:bg-letter-present-hover'],
   correct: ['bg-letter-correct-normal', 'hover:bg-letter-correct-hover'],
 }
 
@@ -28,7 +21,7 @@ const letterUpper = computed(() => props.letter?.toLocaleUpperCase())
 
 <template>
   <button
-    class="w-16 h-16 font-special rounded-sm px-6 py-4 text-2xl"
+    class="w-12 sm:w-16 h-12 sm:h-16 font-special rounded-sm sm:px-6 sm:py-4 text- sm:text-2xl"
     :class="stateClass[props.state]"
   >
     {{ letterUpper }}

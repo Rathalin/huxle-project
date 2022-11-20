@@ -1,11 +1,7 @@
 <script setup lang="ts">
+import type { LetterStateOption } from './letter-state'
 import Letter from './Letter.vue'
 
-export type LetterStateOption =
-  | 'unset'
-  | 'incorrect'
-  | 'partlyCorrect'
-  | 'correct'
 export interface LetterState {
   letter?: string
   state: LetterStateOption

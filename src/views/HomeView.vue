@@ -13,18 +13,10 @@ import Letter from '@/components/ui/main/game/Letter.vue'
         }}</span>
       </h1>
       <div class="mt-2 mb-10 flex flex-row gap-1" aria-hidden="true">
-        <Letter
-          class="motion-safe:animate-wiggle"
-          letter="h"
-          state="partlyCorrect"
-        />
-        <Letter letter="u" state="incorrect" />
-        <Letter letter="x" state="incorrect" />
-        <Letter
-          class="motion-safe:animate-wiggle"
-          letter="l"
-          state="partlyCorrect"
-        />
+        <Letter class="motion-safe:animate-wiggle" letter="h" state="present" />
+        <Letter letter="u" state="absent" />
+        <Letter letter="x" state="absent" />
+        <Letter class="motion-safe:animate-wiggle" letter="l" state="present" />
         <Letter
           class="motion-safe:animate-wiggle-fast"
           letter="e"

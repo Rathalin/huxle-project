@@ -10,12 +10,12 @@ const wordLength = 5
 </script>
 
 <template>
-  <div class="mt-10 flex flex-col gap-1">
-    <div class="flex flex-row gap-1">
-      <LetterInput letter="h" state="partlyCorrect" />
-      <LetterInput letter="u" state="incorrect" />
-      <LetterInput letter="x" state="incorrect" />
-      <LetterInput letter="l" state="partlyCorrect" />
+  <div class="flex flex-col gap-1">
+    <div class="flex flex-row flex-wrap gap-1">
+      <LetterInput letter="h" state="present" />
+      <LetterInput letter="u" state="absent" />
+      <LetterInput letter="x" state="absent" />
+      <LetterInput letter="l" state="present" />
       <LetterInput letter="e" state="correct" />
     </div>
     <div class="flex flex-row gap-1" v-for="_i of tries - 1">
