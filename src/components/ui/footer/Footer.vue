@@ -12,7 +12,7 @@ import NavButton from '../header/NavButton.vue'
         <span>|</span>
         <span>2022</span>
       </div>
-      <div class="w-3/12 flex justify-end">
+      <div class="w-3/12 flex justify-end" title="*Quak*">
         <RouterLink to="/play/🦆">🦆</RouterLink>
       </div>
     </div>
