@@ -23,7 +23,11 @@ function onSwitchClick() {
   <div>
     <SoftButton @click="onSwitchClick">
       <div class="hidden lg:flex gap-1">{{ $t('header.locale.toggle') }}</div>
-      <img :src="selectedLocaleImage" :alt="selectedLocaleUpper" class="h-7" />
+      <img
+        :src="selectedLocaleImage"
+        :alt="selectedLocaleUpper"
+        class="h-7 select-none"
+      />
     </SoftButton>
   </div>
 </template>

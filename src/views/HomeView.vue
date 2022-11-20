@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SecondaryButton from '@/components/ui/buttons/SecondaryButton.vue'
-import Letter from '@/components/ui/main/game/Letter.vue'
+import Letter from '@/components/ui/main/game/board/Letter.vue'
 </script>
 
 <template>

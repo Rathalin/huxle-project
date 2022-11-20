@@ -13,13 +13,13 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  change(newText: string): void
+  (e: 'change', newText: string): void
 }>()
 
 const inputText = ref(props.input?.value ?? '')
 
 function onInputChange(e: Event) {
-  emits.change((e.target as HTMLInputElement).value)
+  emits('change', (e.target as HTMLInputElement).value)
 }
 </script>
 
