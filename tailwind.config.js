@@ -12,6 +12,7 @@ module.exports = {
           400: 'hsl(0, 0%, 40%)',
           500: 'hsl(0, 0%, 29%)',
           600: 'hsl(0, 0%, 21%)',
+          700: 'hsl(0deg 0% 16%)',
           800: 'hsl(0, 0%, 13%)',
           900: 'hsl(0, 0%, 9%)',
         },
@@ -44,6 +45,16 @@ module.exports = {
         primary: ['Cairo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         secondary: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         special: ['Oxanium', 'system-ui', 'sans-serif'],
+      },
+      animation: {
+        wiggle: 'wiggle 2s ease-in-out infinite',
+        'wiggle-fast': 'wiggle 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-2deg)' },
+          '50%': { transform: 'rotate(2deg)' },
+        },
       },
     },
   },

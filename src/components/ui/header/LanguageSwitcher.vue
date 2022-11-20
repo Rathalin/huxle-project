@@ -4,7 +4,7 @@ import { useLocaleStore } from '@/stores/locale.store'
 import type { LocaleOption } from '@/locales/i18n'
 import germany from '@/assets/images/countries/germany.png'
 import unitedKingdom from '@/assets/images/countries/united-kingdom.png'
-import SecondaryButton from '../buttons/SecondaryButton.vue'
+import SoftButton from '../buttons/SoftButton.vue'
 
 const { $state, toggleLocale } = useLocaleStore()
 const images = new Map<LocaleOption, string>()
@@ -21,9 +21,9 @@ function onSwitchClick() {
 
 <template>
   <div>
-    <SecondaryButton @click="onSwitchClick">
+    <SoftButton @click="onSwitchClick">
       <div class="hidden lg:flex gap-1">{{ $t('header.locale.toggle') }}</div>
       <img :src="selectedLocaleImage" :alt="selectedLocaleUpper" class="h-7" />
-    </SecondaryButton>
+    </SoftButton>
   </div>
 </template>

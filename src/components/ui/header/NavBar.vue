@@ -7,6 +7,8 @@ import NavButton from './NavButton.vue'
   <nav
     class="flex justify-start sm:justify-center items-center flex-wrap gap-x-10"
   >
-    <NavButton to="/create" :label="$t('header.link.create.label')" />
+    <RouterLink to="/create">
+      <NavButton>{{ $t('header.link.create.label') }}</NavButton>
+    </RouterLink>
   </nav>
 </template>

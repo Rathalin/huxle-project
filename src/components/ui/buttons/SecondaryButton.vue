@@ -2,8 +2,10 @@
 
 <template>
   <button
-    class="hover:bg-graphite-600 rounded-full px-6 py-1 transition-colors duration-200 flex gap-1"
+    class="bg-graphite-600 hover:bg-graphite-500 rounded-full px-4 py-1 transition-colors duration-200"
   >
-    <slot>Click</slot>
+    <div class="flex gap-1">
+      <slot>Click</slot>
+    </div>
   </button>
 </template>

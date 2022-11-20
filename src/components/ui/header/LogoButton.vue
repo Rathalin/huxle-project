@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import SecondaryButton from '../buttons/SecondaryButton.vue'
 import LogoText from '../logo/LogoText.vue'
+import NavButton from './NavButton.vue'
 </script>
 
 <template>
-  <RouterLink to="/game">
-    <SecondaryButton>
-      <LogoText class="pt-1 text-2xl" />
-    </SecondaryButton>
+  <RouterLink to="/">
+    <NavButton>
+      <div class="pt-1">
+        <LogoText class="text-2xl" />
+      </div>
+    </NavButton>
   </RouterLink>
 </template>
-
-<style scoped></style>

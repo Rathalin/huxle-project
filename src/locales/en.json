@@ -20,6 +20,14 @@
     }
   },
   "view": {
+    "home": {
+      "heading": {
+        "text": "Welcome to",
+        "aria-text": "Welcome to Huxle"
+      },
+      "create": "Create your own Huxle",
+      "receive": "or receive a link from someone else!"
+    },
     "create": {
       "heading": {
         "text": "Create your own"

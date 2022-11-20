@@ -39,6 +39,14 @@
       "submit": {
         "label": "Erstellen"
       }
+    },
+    "home": {
+      "heading": {
+        "text": "Willkommen bei",
+        "aria-text": "Willkommen bei Huxle"
+      },
+      "create": "Erstelle dein eigenes Huxle",
+      "receive": "oder lass dir einen Link von jemand anderem senden!"
     }
   }
 }
