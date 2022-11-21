@@ -18,5 +18,10 @@ export const useLocaleStore = defineStore('locale', () => {
     i18n.global.locale = selectedLocale.value
   }
 
-  return { selectedLocale, toggleLocale }
+  function activateSecretGroguLocale() {
+    selectedLocale.value = 'grogu'
+    i18n.global.locale = selectedLocale.value
+  }
+
+  return { selectedLocale, toggleLocale, activateSecretGroguLocale }
 })

@@ -32,7 +32,10 @@ defineExpose({
 </script>
 
 <template>
-  <dialog ref="dialogEl" class="bg-transparent w-full md:w-2/3 lg:w-1/2">
+  <dialog
+    ref="dialogEl"
+    class="bg-transparent w-full md:w-2/3 lg:w-1/2 2xl:w-1/3"
+  >
     <!-- backdrop:bg-white backdrop:opacity-25 backdrop:backdrop-blur-sm -->
     <form
       class="rounded-sm bg-graphite-700 p-4 flex flex-col gap-y-2 text-gray-200"

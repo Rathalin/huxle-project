@@ -3,14 +3,14 @@
     "locale": {
       "german": "German",
       "english": "English",
-      "toggle": "Auf Deutsch wechseln"
+      "toggle": "Switch to English"
     },
     "link": {
       "create": {
-        "label": "Create your own Huxle"
+        "label": "Create your own Huxle. Yes, hrrrm."
       },
       "create-short": {
-        "label": "Create"
+        "label": "Create. Yrsssss."
       }
     }
   },
@@ -26,10 +26,10 @@
     "home": {
       "heading": {
         "text": "Welcome to",
-        "aria-text": "Welcome to Huxle"
+        "aria-text": "Welcome to Huxle. Hmm."
       },
       "create": "Create your own Huxle",
-      "receive": "or receive a link from someone else!"
+      "receive": "or a link from someone else you can receive!"
     },
     "create": {
       "heading": {
@@ -37,25 +37,25 @@
       },
       "input": {
         "en": {
-          "label": "Your word in English"
+          "label": "Your English word"
         },
         "de": {
-          "label": "Your word in German"
+          "label": "Your German word"
         },
         "error": {
-          "required": "This field is required.",
-          "length": "The word must have {length} letters."
+          "required": "Hrrmmm. Required this field is.",
+          "length": "Have {length} letters the word must."
         }
       },
       "submit": {
-        "label": "Create Link"
+        "label": "Create link. Hmm."
       },
       "dialog": {
         "heading": {
           "text": "Link to share:"
         },
         "copy": {
-          "title": "Copy to clipboard"
+          "title": "Copy to clipboard, you can"
         },
         "copied": {
           "text": "Copied!"
@@ -69,7 +69,7 @@
             "text": "😕"
           },
           "content": {
-            "text": "Sorry, the given link is invalid."
+            "text": "Hrrmmm. Sorry, link is invalid the given."
           }
         }
       }

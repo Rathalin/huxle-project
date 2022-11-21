@@ -45,6 +45,7 @@ module.exports = {
         primary: ['Cairo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         secondary: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         special: ['Oxanium', 'system-ui', 'sans-serif'],
+        grogu: ['Indie Flower', 'system-ui', 'sans-serif'],
       },
       animation: {
         wiggle: 'wiggle 2s ease-in-out infinite',

@@ -11,3 +11,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:is(header, main, footer)[data-grogu='true'] {
+  font-family: theme(fontFamily.grogu);
+}
