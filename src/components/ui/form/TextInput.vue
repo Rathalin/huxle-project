@@ -8,7 +8,7 @@ const props = defineProps<{
     name?: string
     value?: string
   }
-
+  readonly?: boolean
   errors?: string[]
 }>()
 
@@ -33,6 +33,7 @@ function onInputChange(e: Event) {
       class="bg-graphite-600 w-full px-4 py-1 rounded-sm hover:outline outline-1 focus-visible:outline focus-visible:outline-prime-500"
       v-model="inputText"
       @change="onInputChange"
+      :readonly="readonly === true"
     />
     <div
       v-if="errors != null && errors.length > 0"

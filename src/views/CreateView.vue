@@ -2,6 +2,14 @@
 import TextInput from '@/components/ui/form/TextInput.vue'
 import LogoText from '@/components/ui/logo/LogoText.vue'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
+import LinkDialog from '@/components/ui/main/create/LinkDialog.vue'
+import { ref } from '@vue/reactivity'
+
+const linkDialogEl = ref()
+
+function openDialog() {
+  linkDialogEl.value.open()
+}
 </script>
 
 <template>
@@ -22,8 +30,10 @@ import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
     />
     <TextInput :label="$t('view.create.input.de.label')" class="mb-2" />
 
-    <PrimaryButton class="px-6 mt-4">{{
+    <PrimaryButton @click="openDialog" class="px-6 mt-4">{{
       $t('view.create.submit.label')
     }}</PrimaryButton>
+
+    <LinkDialog link="https://localhost:5173/play/asdf123" ref="linkDialogEl" />
   </article>
 </template>
