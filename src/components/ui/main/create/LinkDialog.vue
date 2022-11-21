@@ -20,6 +20,7 @@ function open(): void {
 }
 
 function onClose() {
+  showCopiedHint.value = false
   emits('close')
 }
 
