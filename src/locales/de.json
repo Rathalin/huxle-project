@@ -8,6 +8,9 @@
     "link": {
       "create": {
         "label": "Erstelle dein eigenes Huxle"
+      },
+      "create-short": {
+        "label": "Erstellen"
       }
     }
   },

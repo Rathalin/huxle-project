@@ -6,9 +6,18 @@ import NavButton from './NavButton.vue'
 <template>
   <RouterLink to="/">
     <NavButton>
-      <div class="pt-1">
-        <LogoText class="text-2xl" />
+      <div class="hidden sm:flex">
+        <LogoText class="text-2xl margin-fix" />
+      </div>
+      <div class="flex sm:hidden">
+        <i class="text-2xl leading-tight p-0 material-icons">home</i>
       </div>
     </NavButton>
   </RouterLink>
 </template>
+
+<style scoped>
+.margin-fix {
+  margin-bottom: -2px;
+}
+</style>
