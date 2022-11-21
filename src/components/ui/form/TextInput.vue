@@ -30,7 +30,7 @@ function onInputChange(e: Event) {
       type="text"
       :id="input?.id"
       :name="input?.name"
-      class="bg-graphite-600 w-full px-4 py-1 rounded-sm hover:outline outline-1 focus-visible:outline focus-visible:outline-prime-500"
+      class="bg-graphite-600 w-full px-4 py-1 rounded-sm hover:outline outline-1 focus-visible:outline focus-visible:outline-cyan-600"
       v-model="inputText"
       @change="onInputChange"
       :readonly="readonly === true"

@@ -2,7 +2,7 @@
 
 <template>
   <button
-    class="text-black bg-cyan-600 hover:bg-cyan-700 rounded-full pl-6 pr-3 py-1 transition-colors duration-200 flex gap-1 items-center"
+    class="text-black bg-prime-500 hover:bg-prime-600 rounded-full pl-6 pr-3 py-1 transition-colors duration-200 flex gap-1 items-center"
     type="button"
   >
     <slot>{{ $t('ui.button.default-content') }}</slot>
