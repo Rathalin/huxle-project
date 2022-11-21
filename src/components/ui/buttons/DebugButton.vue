@@ -6,7 +6,8 @@
     type="button"
   >
     <slot>{{ $t('ui.button.default-content') }}</slot>
-    <span class="py-1 px-2 text-gray-300 text-sm bg-purple-900 rounded-full"
+    <span
+      class="py-[2px] px-[6px] font-mono text-gray-300 text-[10pt] uppercase bg-purple-900 rounded-full"
       >Debug</span
     >
   </button>

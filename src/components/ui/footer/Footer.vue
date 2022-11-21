@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLocaleStore } from '@/stores/locale.store'
+import DebugButton from '../buttons/DebugButton.vue'
 
 const { activateSecretGroguLocale } = useLocaleStore()
 </script>
@@ -8,7 +9,7 @@ const { activateSecretGroguLocale } = useLocaleStore()
   <footer class="flex flex-col px-4 pb-1">
     <hr class="w-full border-graphite-600 border-solid pb-1" />
     <div class="flex">
-      <div class="w-3/12 flex items-center">
+      <div class="w-1/2 sm:w-3/12 flex items-center">
         <img
           id="grogu"
           class="cursor-pointer"
@@ -24,8 +25,10 @@ const { activateSecretGroguLocale } = useLocaleStore()
         <span class="hidden md:inline">|</span>
         <span>2022</span>
       </div>
-      <div class="w-3/12 flex justify-end" title="*Quak*">
-        <RouterLink to="/play/🦆">🦆</RouterLink>
+      <div class="w-1/2 sm:w-3/12 flex justify-end" title="*Quak*">
+        <RouterLink to="/play/test">
+          <DebugButton>Show GameView</DebugButton>
+        </RouterLink>
       </div>
     </div>
   </footer>
@@ -33,7 +36,7 @@ const { activateSecretGroguLocale } = useLocaleStore()
 
 <style scoped>
 #grogu {
-  height: 26px;
+  height: 22px;
   filter: brightness(0.8);
 }
 </style>
