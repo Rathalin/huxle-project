@@ -1,9 +1,7 @@
-<script setup lang="ts">
-import NavButton from '../header/NavButton.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <footer class="flex flex-col px-4 pb-1">
+  <footer class="hidden sm:flex flex-col px-4 pb-1">
     <hr class="w-full border-graphite-600 border-solid pb-1" />
     <div class="flex">
       <div class="invisible w-3/12"></div>
