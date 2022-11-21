@@ -38,6 +38,17 @@
       },
       "submit": {
         "label": "Link erstellen"
+      },
+      "dialog": {
+        "heading": {
+          "text": "Link zum Teilen:",
+          "copy": {
+            "title": "In die Zwischenablage kopieren"
+          }
+        },
+        "copied": {
+          "text": "Kopiert!"
+        }
       }
     },
     "home": {

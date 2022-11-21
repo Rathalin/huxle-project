@@ -46,6 +46,17 @@
       },
       "submit": {
         "label": "Create Link"
+      },
+      "dialog": {
+        "heading": {
+          "text": "Link to share:",
+          "copy": {
+            "title": "Copy to clipboard"
+          }
+        },
+        "copied": {
+          "text": "Copied!"
+        }
       }
     }
   }

@@ -34,6 +34,9 @@ function openDialog() {
       $t('view.create.submit.label')
     }}</PrimaryButton>
 
-    <LinkDialog link="https://localhost:5173/play/asdf123" ref="linkDialogEl" />
+    <LinkDialog
+      link="https://localhost:5173/play/example-hash"
+      ref="linkDialogEl"
+    />
   </article>
 </template>

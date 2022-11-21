@@ -42,12 +42,16 @@ defineExpose({
       method="dialog"
     >
       <div class="flex justify-between">
-        <h1 class="text-xl">Link to share:</h1>
+        <h1 class="text-xl">{{ $t('view.create.dialog.heading.text') }}</h1>
         <IconButton @click="onCloseClick">
           <i class="material-icons">close</i>
         </IconButton>
       </div>
-      <div class="flex gap-x-2" @click="onCopyClick">
+      <div
+        class="flex gap-x-2"
+        @click="onCopyClick"
+        :title="$t('view.create.dialog.heading.copy.title')"
+      >
         <TextInput :input="{ value: link }" class="flex-1" readonly />
         <IconButton>
           <i class="material-icons">content_copy</i>
@@ -58,7 +62,7 @@ defineExpose({
           class="text-green-400 transition-opacity duration-300"
           :class="{ 'opacity-0': !showCopiedHint }"
         >
-          Copied!
+          {{ $t('view.create.dialog.copied.text') }}
         </div>
       </div>
     </form>
