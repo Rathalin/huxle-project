@@ -5,10 +5,10 @@ import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import LinkDialog from '@/components/ui/main/create/LinkDialog.vue'
 import { ref } from '@vue/reactivity'
 
-const linkDialogEl = ref()
+const linkDialogEl = ref<InstanceType<typeof LinkDialog> | null>(null)
 
 function openDialog() {
-  linkDialogEl.value.open()
+  linkDialogEl.value?.open()
 }
 </script>
 
@@ -35,7 +35,7 @@ function openDialog() {
     }}</PrimaryButton>
 
     <LinkDialog
-      link="https://localhost:5173/play/example-hash"
+      link="http://127.0.0.1:5173/play/example-hash"
       ref="linkDialogEl"
     />
   </article>

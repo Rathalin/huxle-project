@@ -49,10 +49,10 @@
       },
       "dialog": {
         "heading": {
-          "text": "Link to share:",
-          "copy": {
-            "title": "Copy to clipboard"
-          }
+          "text": "Link to share:"
+        },
+        "copy": {
+          "title": "Copy to clipboard"
         },
         "copied": {
           "text": "Copied!"

@@ -2,6 +2,7 @@
 import { ref } from '@vue/reactivity'
 import IconButton from '@/components/ui/buttons/IconButton.vue'
 import TextInput from '@/components/ui/form/TextInput.vue'
+import SoftDialog from '../../dialogs/SoftDialog.vue'
 
 const props = defineProps<{
   link: string
@@ -11,16 +12,14 @@ const emits = defineEmits<{
   (e: 'close'): void
 }>()
 
-const dialogEl = ref<HTMLDialogElement | null>(null)
+const dialogEl = ref<InstanceType<typeof SoftDialog> | null>(null)
 const showCopiedHint = ref(false)
 
 function open(): void {
-  dialogEl.value?.showModal()
+  dialogEl.value?.open()
 }
 
-function onCloseClick(_e: Event) {
-  dialogEl.value?.close()
-  showCopiedHint.value = false
+function onClose() {
   emits('close')
 }
 
@@ -35,38 +34,29 @@ defineExpose({
 </script>
 
 <template>
-  <dialog ref="dialogEl" class="bg-transparent w-full md:w-2/3 lg:w-1/2">
-    <!-- backdrop:bg-white backdrop:opacity-25 backdrop:backdrop-blur-sm -->
-    <form
-      class="rounded-sm bg-graphite-700 p-4 flex flex-col gap-y-2 text-gray-200"
-      method="dialog"
+  <SoftDialog ref="dialogEl" @close="onClose">
+    <template v-slot:header
+      ><h1 class="text-xl">{{ $t('view.create.dialog.heading.text') }}</h1>
+    </template>
+    <div
+      class="flex gap-x-2"
+      @click="onCopyClick"
+      :title="$t('view.create.dialog.copy.title')"
     >
-      <div class="flex justify-between">
-        <h1 class="text-xl">{{ $t('view.create.dialog.heading.text') }}</h1>
-        <IconButton @click="onCloseClick">
-          <i class="material-icons">close</i>
-        </IconButton>
-      </div>
+      <TextInput :input="{ value: link }" class="flex-1" readonly />
+      <IconButton>
+        <i class="material-icons">content_copy</i>
+      </IconButton>
+    </div>
+    <div class="flex flex-col items-center">
       <div
-        class="flex gap-x-2"
-        @click="onCopyClick"
-        :title="$t('view.create.dialog.heading.copy.title')"
+        class="text-green-400 transition-opacity duration-300"
+        :class="{ 'opacity-0': !showCopiedHint }"
       >
-        <TextInput :input="{ value: link }" class="flex-1" readonly />
-        <IconButton>
-          <i class="material-icons">content_copy</i>
-        </IconButton>
+        {{ $t('view.create.dialog.copied.text') }}
       </div>
-      <div class="flex flex-col items-center">
-        <div
-          class="text-green-400 transition-opacity duration-300"
-          :class="{ 'opacity-0': !showCopiedHint }"
-        >
-          {{ $t('view.create.dialog.copied.text') }}
-        </div>
-      </div>
-    </form>
-  </dialog>
+    </div>
+  </SoftDialog>
 </template>
 
 <style scoped>

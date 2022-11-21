@@ -41,10 +41,10 @@
       },
       "dialog": {
         "heading": {
-          "text": "Link zum Teilen:",
-          "copy": {
-            "title": "In die Zwischenablage kopieren"
-          }
+          "text": "Link zum Teilen:"
+        },
+        "copy": {
+          "title": "In die Zwischenablage kopieren"
         },
         "copied": {
           "text": "Kopiert!"
