@@ -58,6 +58,23 @@
       },
       "create": "Erstelle dein eigenes Huxle",
       "receive": "oder lass dir einen Link von jemand anderem senden!"
+    },
+    "game": {
+      "dialog": {
+        "invalid-link": {
+          "heading": {
+            "text": "😕"
+          },
+          "content": {
+            "text": "Tut uns Leid, der Link ist ungültig."
+          }
+        }
+      }
+    }
+  },
+  "ui": {
+    "button": {
+      "default-content": "Klicken"
     }
   }
 }

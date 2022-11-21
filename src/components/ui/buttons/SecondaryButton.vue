@@ -6,7 +6,7 @@
     type="button"
   >
     <div class="flex gap-1">
-      <slot>Click</slot>
+      <slot>{{ $t('ui.button.default-content') }}</slot>
     </div>
   </button>
 </template>

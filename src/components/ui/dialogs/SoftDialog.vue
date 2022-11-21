@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import { ref } from '@vue/reactivity'
 import IconButton from '@/components/ui/buttons/IconButton.vue'
-import TextInput from '@/components/ui/form/TextInput.vue'
+
+withDefaults(
+  defineProps<{
+    closable?: boolean
+  }>(),
+  {
+    closable: true,
+  }
+)
 
 const emits = defineEmits<{
   (e: 'close'): void
@@ -38,7 +46,7 @@ defineExpose({
           <h1 class="text-xl">
             <slot name="header"></slot>
           </h1>
-          <IconButton @click="onCloseClick">
+          <IconButton v-if="closable" @click="onCloseClick">
             <i class="material-icons">close</i>
           </IconButton>
         </div>

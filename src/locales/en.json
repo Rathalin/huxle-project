@@ -58,6 +58,23 @@
           "text": "Copied!"
         }
       }
+    },
+    "game": {
+      "dialog": {
+        "invalid-link": {
+          "heading": {
+            "text": "😕"
+          },
+          "content": {
+            "text": "Sorry, the given link is invalid."
+          }
+        }
+      }
+    }
+  },
+  "ui": {
+    "button": {
+      "default-content": "Click"
     }
   }
 }

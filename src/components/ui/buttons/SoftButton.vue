@@ -5,6 +5,6 @@
     class="hover:bg-graphite-600 rounded-full px-4 py-1 transition-colors duration-200 flex gap-1"
     type="button"
   >
-    <slot>Click</slot>
+    <slot>{{ $t('ui.button.default-content') }}</slot>
   </button>
 </template>

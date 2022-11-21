@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
+import DebugButton from '@/components/ui/buttons/DebugButton.vue'
 import SoftDialog from '@/components/ui/dialogs/SoftDialog.vue'
 import Board from '@/components/ui/main/game/board/Board.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/Keyboard.vue'
@@ -20,10 +20,14 @@ function onTestClick(_e: Event) {
   <div class="lg:mt-6 flex flex-col items-center">
     <Board word="huxle" />
     <Keyboard :letter-states="{}" />
-    <PrimaryButton @click="onTestClick">Test</PrimaryButton>
-    <SoftDialog ref="dialogEl">
-      <template v-slot:header></template>
-      {{ $route.hash }}
-    </SoftDialog>
+    <div class="pt-6">
+      <DebugButton @click="onTestClick">Show invalid link dialog</DebugButton>
+      <SoftDialog ref="dialogEl">
+        <template v-slot:header>
+          <span>{{ $t('view.game.dialog.invalid-link.heading.text') }}</span>
+        </template>
+        <div>{{ $t('view.game.dialog.invalid-link.content.text') }}</div>
+      </SoftDialog>
+    </div>
   </div>
 </template>
