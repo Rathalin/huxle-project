@@ -5,6 +5,8 @@ import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import LinkDialog from '@/components/ui/main/create/LinkDialog.vue'
 import { ref } from '@vue/reactivity'
 
+const HOST_URL = import.meta.env.VITE_HOST_URL ?? 'http://127.0.0.1:5173/'
+
 const linkDialogEl = ref<InstanceType<typeof LinkDialog> | null>(null)
 
 function openDialog() {
@@ -34,9 +36,6 @@ function openDialog() {
       $t('view.create.submit.label')
     }}</PrimaryButton>
 
-    <LinkDialog
-      link="http://127.0.0.1:5173/play/example-hash"
-      ref="linkDialogEl"
-    />
+    <LinkDialog :link="`${HOST_URL}play/example-hash`" ref="linkDialogEl" />
   </article>
 </template>
