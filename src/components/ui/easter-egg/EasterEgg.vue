@@ -14,6 +14,7 @@ const maxX = 95
 const fadeAt = 80
 const despawn = 90
 const imageWidthPx = 70
+const maxScreenWidth = 4096
 
 let frame = 0
 let originalRain = new Array(imageCount).fill(null).map((_) => {
@@ -46,7 +47,7 @@ function loop() {
 
 function handleWindowWidth() {
   currentRain = originalRain
-    .slice(0, Math.round(imageCount * (window.innerWidth / 1920)))
+    .slice(0, Math.round(imageCount * (window.innerWidth / maxScreenWidth)))
     .sort((a, b) => a.scale - b.scale)
   windowWidth.value = window.innerWidth
 }
