@@ -50,6 +50,7 @@ module.exports = {
       animation: {
         wiggle: 'wiggle 2s ease-in-out infinite',
         'wiggle-fast': 'wiggle 1.5s ease-in-out infinite',
+        'spin-slow': 'spin 5s linear infinite',
       },
       keyframes: {
         wiggle: {

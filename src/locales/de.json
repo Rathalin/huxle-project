@@ -79,5 +79,17 @@
     "button": {
       "default-content": "Klicken"
     }
+  },
+  "app": {
+    "hint": {
+      "development": {
+        "heading": {
+          "text": "Grüß dich"
+        },
+        "content": {
+          "text": "Diese App wird noch entwickelt, darum funktioniert noch nicht alles!"
+        }
+      }
+    }
   }
 }
