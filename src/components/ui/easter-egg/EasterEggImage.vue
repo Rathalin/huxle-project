@@ -2,7 +2,7 @@
 defineProps<{
   x: number
   y: number
-  r: number
+  scale: number
   rotation: string
   opacity: string
 }>()
@@ -14,7 +14,7 @@ defineProps<{
     :style="{
       left: `${x}%`,
       top: `${y}%`,
-      transform: `scale(${r})`,
+      transform: `scale(${scale})`,
       rotate: rotation,
       opacity: opacity,
     }"
