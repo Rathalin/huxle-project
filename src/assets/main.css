@@ -1,9 +1,5 @@
 @import './base.css';
 
-body {
-  overflow: hidden;
-}
-
 #app {
   background-color: theme(colors.graphite.800);
   color: theme(textColor.normal);

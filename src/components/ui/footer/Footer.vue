@@ -26,7 +26,7 @@ const { activateSecretGroguLocale } = useLocaleStore()
         <span>2022</span>
       </div>
       <div class="w-1/2 sm:w-3/12 flex justify-end" title="*Quak*">
-        <RouterLink to="/play/test">
+        <RouterLink to="/play/example-hash">
           <DebugButton>Show GameView</DebugButton>
         </RouterLink>
       </div>

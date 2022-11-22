@@ -3,6 +3,8 @@ defineProps<{
   x: number
   y: number
   r: number
+  rotation: string
+  opacity: string
 }>()
 </script>
 
@@ -13,6 +15,8 @@ defineProps<{
       left: `${x}%`,
       top: `${y}%`,
       transform: `scale(${r})`,
+      rotate: rotation,
+      opacity: opacity,
     }"
   >
     <slot></slot>
