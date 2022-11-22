@@ -79,5 +79,17 @@
     "button": {
       "default-content": "Click"
     }
+  },
+  "app": {
+    "hint": {
+      "development": {
+        "content": {
+          "text": "This app is still under development and therefore incomplete!"
+        },
+        "heading": {
+          "text": "Hey there"
+        }
+      }
+    }
   }
 }
