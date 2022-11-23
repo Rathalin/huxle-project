@@ -7,7 +7,7 @@ const vueInstance = getCurrentInstance()
 let resizeEventHandler: (this: Window, ev: UIEvent) => any = function () {}
 const windowWidth = ref(0)
 
-const imageCount = 100
+const imageCount = 50
 const initialY = -20
 const minX = 5
 const maxX = 95
