@@ -7,7 +7,7 @@ export interface LetterState {
   state: LetterStateOption
 }
 
-const props = defineProps<LetterState>()
+defineProps<LetterState>()
 </script>
 
 <template>
