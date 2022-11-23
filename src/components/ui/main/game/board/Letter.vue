@@ -21,6 +21,7 @@ const letterUpper = computed(() => props.letter?.toLocaleUpperCase())
 
 <template>
   <button
+    type="button"
     class="w-11 sm:w-16 h-11 sm:h-16 font-special rounded-sm sm:px-4 sm:py-2 text- sm:text-2xl select-none"
     :class="stateClass[props.state]"
   >

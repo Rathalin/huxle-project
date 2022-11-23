@@ -40,8 +40,8 @@ defineExpose({
       class="rounded-sm bg-graphite-700 p-8 flex flex-col gap-y-2 text-gray-200"
       method="dialog"
     >
-      <div class="flex justify-between">
-        <h1 class="text-xl">
+      <div class="flex items-center">
+        <h1 class="flex-1">
           <slot name="header"></slot>
         </h1>
         <IconButton v-if="closable" @click="onCloseClick">

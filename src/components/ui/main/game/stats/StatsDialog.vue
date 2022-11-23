@@ -17,9 +17,12 @@ function open(): void {
   dialogEl.value?.open()
 }
 
-const statsString = computed(
-  () => `Guesses: ${props.guesses}, Time: ${props.time}`
-)
+const statsString = computed(() => {
+  const lines: string[] = []
+  lines.push(`Guesses: ${props.guesses}`)
+  lines.push(`Time: ${props.time}`)
+  return lines.join('\n')
+})
 
 function onCopyClick(_e: Event) {
   navigator.clipboard.writeText(statsString.value)
@@ -33,6 +36,11 @@ defineExpose({
 
 <template>
   <SoftDialog ref="dialogEl" @close="showCopiedHint = false">
+    <template v-slot:header>
+      <div class="flex justify-center text-2xl">
+        {{ $t('view.game.dialog.stats.header') }}
+      </div>
+    </template>
     <div class="flex flex-col">
       <div>{{ $t('view.game.dialog.stats.guesses', { guesses }) }}</div>
       <div>{{ $t('view.game.dialog.stats.time', { time }) }}</div>

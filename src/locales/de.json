@@ -80,7 +80,8 @@
           "copied": "Kopiert!",
           "share": "Teilen",
           "guesses": "Versuche: {guesses}",
-          "time": "Zeit: {time}"
+          "time": "Zeit: {time}",
+          "header": "Statistik"
         }
       }
     }

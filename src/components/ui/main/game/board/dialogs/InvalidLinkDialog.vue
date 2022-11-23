@@ -16,7 +16,9 @@ defineExpose({
 <template>
   <SoftDialog ref="dialogEl">
     <template v-slot:header>
-      <span>{{ $t('view.game.dialog.invalid-link.heading') }}</span>
+      <span class="text-4xl">{{
+        $t('view.game.dialog.invalid-link.heading')
+      }}</span>
     </template>
     <div>{{ $t('view.game.dialog.invalid-link.content') }}</div>
   </SoftDialog>
