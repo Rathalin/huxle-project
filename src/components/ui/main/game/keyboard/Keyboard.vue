@@ -11,9 +11,9 @@ defineEmits<{
 }>()
 
 const rows = [
-  'qwertyuiop'.split(''),
+  'qwertzuiop'.split(''),
   'asdfghjkl'.split(''),
-  ['Enter', ...'zxcvbnm'.split(''), 'Backspace'],
+  ['Enter', ...'xcvbnm'.split(''), 'Backspace'],
 ]
 </script>
 
@@ -24,5 +24,3 @@ const rows = [
     </div>
   </div>
 </template>
-
-<style scoped></style>
