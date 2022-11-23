@@ -7,7 +7,7 @@ import { ref } from '@vue/reactivity'
 
 const HOST_URL = import.meta.env.VITE_HOST_URL ?? 'http://127.0.0.1:5173/'
 
-const linkDialogEl = ref<InstanceType<typeof LinkDialog> | null>(null)
+const linkDialogEl = ref<InstanceType<typeof LinkDialog>>()
 
 function openDialog() {
   linkDialogEl.value?.open()

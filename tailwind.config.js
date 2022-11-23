@@ -34,6 +34,9 @@ module.exports = {
             hover: 'hsl(102, 79%, 38%)',
           },
         },
+        dialog: {
+          backdrop: 'hsla(0, 0%, 78%, 0.25)',
+        },
       },
       textColor: {
         normal: 'hsl(0, 0%, 87%)',

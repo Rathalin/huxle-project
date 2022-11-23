@@ -1,4 +1,5 @@
 @import './base.css';
+@import './scrollbar.css';
 
 #app {
   background-color: theme(colors.graphite.800);

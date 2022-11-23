@@ -65,12 +65,16 @@
     "game": {
       "dialog": {
         "invalid-link": {
-          "heading": {
-            "text": "😕"
-          },
-          "content": {
-            "text": "Tut uns Leid, der Link ist ungültig."
-          }
+          "heading": "😕",
+          "content": "Dieser Link ist leider ungültig."
+        },
+        "loser": {
+          "content": "Passiert. Was soll das auch für ein Wort sein...",
+          "heading": "😦"
+        },
+        "winner": {
+          "content": "Super!",
+          "heading": "🥳"
         }
       }
     }

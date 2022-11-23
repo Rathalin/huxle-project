@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './router/router'
 import { i18n } from './locales/i18n'
 
-import './assets/main.css'
+import './assets/styles/main.css'
 
 const app = createApp(App)
 

@@ -10,7 +10,7 @@ import EasterEgg from './components/ui/easter-egg/EasterEgg.vue'
 const { $state } = useLocaleStore()
 const isGroguMode = computed(() => $state.selectedLocale === 'grogu')
 
-const dialogEl = ref<InstanceType<typeof SoftDialog> | null>(null)
+const dialogEl = ref<InstanceType<typeof SoftDialog>>()
 
 onMounted(() => {
   if (import.meta.env.PROD) {

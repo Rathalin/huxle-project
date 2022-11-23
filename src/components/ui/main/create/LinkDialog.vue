@@ -12,7 +12,7 @@ const emits = defineEmits<{
   (e: 'close'): void
 }>()
 
-const dialogEl = ref<InstanceType<typeof SoftDialog> | null>(null)
+const dialogEl = ref<InstanceType<typeof SoftDialog>>()
 const showCopiedHint = ref(false)
 
 function open(): void {
