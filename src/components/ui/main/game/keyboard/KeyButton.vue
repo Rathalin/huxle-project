@@ -10,7 +10,7 @@ defineEmits<{
 
 <template>
   <button
-    class="bg-graphite-600 hover:bg-graphite-500 px-2 py-1 sm:px-4 sm:py-3 rounded-sm key-min-width"
+    class="bg-graphite-600 hover:bg-graphite-500 px-2 py-3 sm:px-4 sm:py-3 rounded-sm key-min-width"
     @click="$emit('key', keyChar)"
   >
     <span
