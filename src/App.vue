@@ -14,7 +14,7 @@ const dialogEl = ref<InstanceType<typeof SoftDialog>>()
 
 onMounted(() => {
   if (import.meta.env.PROD) {
-    dialogEl.value?.open()
+    dialogEl.value?.openDialog()
   }
 })
 </script>

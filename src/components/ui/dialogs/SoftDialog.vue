@@ -17,17 +17,22 @@ const emits = defineEmits<{
 
 const dialogEl = ref<HTMLDialogElement>()
 
-function open(): void {
+function openDialog(): void {
   dialogEl.value?.showModal()
 }
 
-function onCloseClick(_e: Event) {
+function closeDialog() {
   dialogEl.value?.close()
+}
+
+function onCloseClick(_e: Event) {
+  closeDialog()
   emits('close')
 }
 
 defineExpose({
-  open,
+  openDialog,
+  closeDialog,
 })
 </script>
 

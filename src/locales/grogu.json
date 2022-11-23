@@ -3,7 +3,7 @@
     "locale": {
       "german": "German",
       "english": "English",
-      "toggle": "Switch to English"
+      "toggle": "Exit Grogu Mode"
     },
     "link": {
       "create": {
@@ -82,6 +82,13 @@
           "guesses": "Guesses: {guesses}",
           "time": "Time: {time}",
           "header": "Stats"
+        },
+        "reset-warning": {
+          "heading": "Really to discard your progress you want and to German switch?",
+          "content": {
+            "cancel": "Cancel",
+            "confirm": "Switch to German, hrmm."
+          }
         }
       }
     }

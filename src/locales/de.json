@@ -82,6 +82,13 @@
           "guesses": "Versuche: {guesses}",
           "time": "Zeit: {time}",
           "header": "Statistik"
+        },
+        "reset-warning": {
+          "heading": "Möchtest du wirklich den Fortschritt zurücksetzen und zu Englisch wechseln?",
+          "content": {
+            "cancel": "Abbrechen",
+            "confirm": "Zu Englisch wechseln"
+          }
         }
       }
     }

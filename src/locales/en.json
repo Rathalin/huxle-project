@@ -82,6 +82,13 @@
           "guesses": "Guesses: {guesses}",
           "time": "Time: {time}",
           "header": "Stats"
+        },
+        "reset-warning": {
+          "heading": "Do you really want to discard your progress and switch to German?",
+          "content": {
+            "confirm": "Switch to German",
+            "cancel": "Cancel"
+          }
         }
       }
     }

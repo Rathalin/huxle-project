@@ -13,8 +13,12 @@ const props = defineProps<{
 const dialogEl = ref<InstanceType<typeof SoftDialog>>()
 const showCopiedHint = ref(false)
 
-function open(): void {
-  dialogEl.value?.open()
+function openDialog() {
+  dialogEl.value?.openDialog()
+}
+
+function closeDialog() {
+  dialogEl.value?.closeDialog()
 }
 
 const statsString = computed(() => {
@@ -30,7 +34,8 @@ function onCopyClick(_e: Event) {
 }
 
 defineExpose({
-  open,
+  openDialog,
+  closeDialog,
 })
 </script>
 

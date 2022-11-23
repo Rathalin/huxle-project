@@ -16,3 +16,7 @@
 :is(header, main, footer)[data-grogu='true'] {
   font-family: theme(fontFamily.grogu);
 }
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}

@@ -4,12 +4,17 @@ import { ref } from 'vue'
 
 const dialogEl = ref<InstanceType<typeof SoftDialog>>()
 
-function open(): void {
-  dialogEl.value?.open()
+function openDialog() {
+  dialogEl.value?.openDialog()
+}
+
+function closeDialog() {
+  dialogEl.value?.closeDialog()
 }
 
 defineExpose({
-  open,
+  openDialog,
+  closeDialog,
 })
 </script>
 

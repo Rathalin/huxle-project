@@ -15,8 +15,12 @@ const emits = defineEmits<{
 const dialogEl = ref<InstanceType<typeof SoftDialog>>()
 const showCopiedHint = ref(false)
 
-function open(): void {
-  dialogEl.value?.open()
+function openDialog() {
+  dialogEl.value?.openDialog()
+}
+
+function closeDialog() {
+  dialogEl.value?.closeDialog()
 }
 
 function onClose() {
@@ -30,7 +34,8 @@ function onCopyClick(_e: Event) {
 }
 
 defineExpose({
-  open,
+  openDialog,
+  closeDialog,
 })
 </script>
 

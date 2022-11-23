@@ -10,7 +10,7 @@ const HOST_URL = import.meta.env.VITE_HOST_URL ?? 'http://127.0.0.1:5173/'
 const linkDialogEl = ref<InstanceType<typeof LinkDialog>>()
 
 function openDialog() {
-  linkDialogEl.value?.open()
+  linkDialogEl.value?.openDialog()
 }
 </script>
 
@@ -32,7 +32,7 @@ function openDialog() {
     />
     <TextInput :label="$t('view.create.input.de.label')" class="mb-2" />
 
-    <PrimaryButton @click="openDialog" class="px-6 mt-4">{{
+    <PrimaryButton @click="openDialog" class="px-7 mt-4">{{
       $t('view.create.submit.label')
     }}</PrimaryButton>
 
