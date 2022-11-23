@@ -40,9 +40,8 @@ module.exports = {
       },
       textColor: {
         normal: 'hsl(0, 0%, 87%)',
-        error: {
-          normal: 'hsl(0, 100%, 66%)',
-        },
+        error: '#f87171',
+        success: '#4ade80',
       },
       fontFamily: {
         primary: ['Cairo', 'ui-sans-serif', 'system-ui', 'sans-serif'],

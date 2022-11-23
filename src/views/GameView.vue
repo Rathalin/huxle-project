@@ -40,6 +40,6 @@ const statsDialogEl = ref<InstanceType<typeof StatsDialog>>()
     <InvalidLinkDialog ref="invalidLinkDialogEl" />
     <WinnerDialog ref="winnerDialogEl" />
     <LoserDialog ref="loserDialogEl" />
-    <StatsDialog ref="statsDialogEl" :guesses="1" :time-in-seconds="420" />
+    <StatsDialog ref="statsDialogEl" :guesses="1" time="00:04:20" />
   </div>
 </template>

@@ -75,6 +75,12 @@
         "winner": {
           "content": "Nice!",
           "heading": "🥳"
+        },
+        "stats": {
+          "copied": "Copied!",
+          "share": "Share",
+          "guesses": "Guesses: {guesses}",
+          "time": "Time: {time}"
         }
       }
     }

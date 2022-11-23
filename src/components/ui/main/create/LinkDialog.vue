@@ -51,7 +51,7 @@ defineExpose({
     </div>
     <div class="flex flex-col items-center">
       <div
-        class="text-green-400 transition-opacity duration-300"
+        class="text-success transition-opacity duration-300"
         :class="{ 'opacity-0': !showCopiedHint }"
       >
         {{ $t('view.create.dialog.copied.text') }}
