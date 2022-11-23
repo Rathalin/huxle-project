@@ -30,14 +30,14 @@ function onInputChange(e: Event) {
       type="text"
       :id="input?.id"
       :name="input?.name"
-      class="bg-graphite-600 w-full px-4 py-1 rounded-sm hover:outline outline-1 focus-visible:outline focus-visible:outline-amber-600"
+      class="bg-graphite-600 w-full px-3 py-2 rounded-sm hover:outline outline-1 focus-visible:outline focus-visible:outline-amber-600 leading-tight"
       v-model="inputText"
       @change="onInputChange"
       :readonly="readonly === true"
     />
     <div
       v-if="errors != null && errors.length > 0"
-      class="flex flex-col text-sm text-error-normal"
+      class="flex flex-col text-sm text-error"
     >
       <div v-for="error of errors">{{ error }}</div>
     </div>
