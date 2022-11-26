@@ -2,7 +2,7 @@
 
 <template>
   <button
-    class="bg-graphite-600 hover:bg-graphite-500 rounded-full px-4 py-1 transition-colors duration-200"
+    class="rounded-full bg-neutral-200 px-4 py-1 transition-colors duration-200 hover:bg-neutral-300 dark:bg-graphite-500 dark:hover:bg-graphite-400"
     type="button"
   >
     <div class="flex gap-1">

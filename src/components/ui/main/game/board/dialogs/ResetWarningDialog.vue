@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import SecondaryButton from '@/components/ui/buttons/SecondaryButton.vue'
-import SoftDialog from '@/components/ui/dialogs/SoftDialog.vue'
+import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { ref } from 'vue'
 
-const dialogEl = ref<InstanceType<typeof SoftDialog>>()
+const dialogEl = ref<InstanceType<typeof BasicDialog>>()
 
 function onConfirmClick(_e: Event) {
   dialogEl.value?.closeDialog()
@@ -24,13 +24,13 @@ defineExpose({
 </script>
 
 <template>
-  <SoftDialog ref="dialogEl" :closable="false">
+  <BasicDialog ref="dialogEl" :closable="false">
     <template v-slot:header>
       <span class="text-xl">{{
         $t('view.game.dialog.reset-warning.heading')
       }}</span>
     </template>
-    <div class="flex flex-wrap gap-2 mt-4">
+    <div class="mt-4 flex flex-wrap gap-2">
       <SecondaryButton @click="onCancelClick">{{
         $t('view.game.dialog.reset-warning.content.cancel')
       }}</SecondaryButton>
@@ -38,5 +38,5 @@ defineExpose({
         $t('view.game.dialog.reset-warning.content.confirm')
       }}</PrimaryButton>
     </div>
-  </SoftDialog>
+  </BasicDialog>
 </template>

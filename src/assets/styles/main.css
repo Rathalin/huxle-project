@@ -2,8 +2,8 @@
 @import './scrollbar.css';
 
 #app {
-  background-color: theme(colors.graphite.800);
-  color: theme(textColor.normal);
+  background-color: theme(colors.neutral.100);
+  color: theme(textColor.light.normal);
   font-family: theme(fontFamily.primary);
   line-height: initial;
   min-height: 100vh;
@@ -11,6 +11,13 @@
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  #app {
+    background-color: theme(colors.graphite.700);
+    color: theme(textColor.dark.normal);
+  }
 }
 
 :is(header, main, footer)[data-grogu='true'] {

@@ -10,11 +10,11 @@ defineEmits<{
 
 <template>
   <button
-    class="bg-graphite-600 hover:bg-graphite-500 px-2 py-3 sm:px-4 sm:py-3 rounded-sm key-min-width"
+    class="key-min-width rounded-sm bg-neutral-300 px-2 py-3 hover:bg-neutral-400 dark:bg-graphite-500 dark:hover:bg-graphite-400 sm:px-4 sm:py-3"
     @click="$emit('key', keyChar)"
   >
     <span
-      class="text-sm sm:text-2xl uppercase flex items-center justify-center"
+      class="flex items-center justify-center text-sm uppercase sm:text-2xl"
     >
       <span v-if="keyChar !== 'Backspace'">{{ keyChar }}</span>
       <i v-else class="material-icons">backspace</i>

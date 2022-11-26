@@ -5,9 +5,11 @@ import LocaleSwitcher from './LocaleSwitcher.vue'
 </script>
 
 <template>
-  <header class="bg-graphite-900 p-2 drop-shadow-md flex items-center">
-    <LogoButton class="w-3/12 flex sm:justify-start sm:items-center" />
-    <NavBar class="w-6/12 flex justify-start sm:justify-center items-center" />
-    <LocaleSwitcher class="w-3/12 flex justify-end items-center" />
+  <header
+    class="flex items-center bg-neutral-300 p-2 drop-shadow-md dark:bg-graphite-800"
+  >
+    <LogoButton class="flex w-3/12 sm:items-center sm:justify-start" />
+    <NavBar class="flex w-6/12 items-center justify-start sm:justify-center" />
+    <LocaleSwitcher class="flex w-3/12 items-center justify-end" />
   </header>
 </template>

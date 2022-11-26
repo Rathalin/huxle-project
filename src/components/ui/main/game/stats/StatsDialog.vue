@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
-import SoftDialog from '@/components/ui/dialogs/SoftDialog.vue'
+import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { computed, ref } from 'vue'
 import Board from '../board/Board.vue'
 
@@ -10,7 +10,7 @@ const props = defineProps<{
   // letterStates: Record<string, LetterStateOption>
 }>()
 
-const dialogEl = ref<InstanceType<typeof SoftDialog>>()
+const dialogEl = ref<InstanceType<typeof BasicDialog>>()
 const showCopiedHint = ref(false)
 
 function openDialog() {
@@ -40,7 +40,7 @@ defineExpose({
 </script>
 
 <template>
-  <SoftDialog ref="dialogEl" @close="showCopiedHint = false">
+  <BasicDialog ref="dialogEl" @close="showCopiedHint = false">
     <template v-slot:header>
       <div class="flex justify-center text-2xl">
         {{ $t('view.game.dialog.stats.header') }}
@@ -57,12 +57,12 @@ defineExpose({
           $t('view.game.dialog.stats.share')
         }}</PrimaryButton>
         <div
-          class="text-success mt-2 transition-opacity duration-300"
+          class="mt-2 text-light-success transition-opacity duration-300 dark:text-dark-success"
           :class="{ 'opacity-0': !showCopiedHint }"
         >
           {{ $t('view.game.dialog.stats.copied') }}
         </div>
       </div>
     </div>
-  </SoftDialog>
+  </BasicDialog>
 </template>

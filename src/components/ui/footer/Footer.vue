@@ -7,9 +7,9 @@ const { activateSecretGroguLocale } = useLocaleStore()
 
 <template>
   <footer class="flex flex-col px-4 pb-1">
-    <hr class="w-full border-graphite-600 border-solid pb-1" />
-    <div class="flex">
-      <div class="w-1/2 sm:w-3/12 flex items-center">
+    <hr class="w-full border-solid border-graphite-500 pb-1" />
+    <div class="flex items-center">
+      <div class="flex w-1/2 items-center sm:w-3/12">
         <img
           id="grogu"
           class="cursor-pointer"
@@ -19,13 +19,13 @@ const { activateSecretGroguLocale } = useLocaleStore()
         />
       </div>
       <div
-        class="w-6/12 hidden sm:flex flex-col md:flex-row flex-wrap md:justify-center gap-x-4"
+        class="hidden w-6/12 flex-col flex-wrap gap-x-4 sm:flex md:flex-row md:justify-center"
       >
         <span>{{ $t('footer.label') }}</span>
         <span class="hidden md:inline">|</span>
         <span>2022</span>
       </div>
-      <div class="w-1/2 sm:w-3/12 flex justify-end" title="*Quak*">
+      <div class="flex w-1/2 justify-end sm:w-3/12" title="*Quak*">
         <RouterLink to="/play/example-hash">
           <DebugButton>Show GameView</DebugButton>
         </RouterLink>

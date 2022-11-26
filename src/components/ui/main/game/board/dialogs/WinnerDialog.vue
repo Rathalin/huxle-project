@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import SoftDialog from '@/components/ui/dialogs/SoftDialog.vue'
+import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { ref } from 'vue'
 
-const dialogEl = ref<InstanceType<typeof SoftDialog>>()
+const dialogEl = ref<InstanceType<typeof BasicDialog>>()
 
 function openDialog() {
   dialogEl.value?.openDialog()
@@ -19,10 +19,10 @@ defineExpose({
 </script>
 
 <template>
-  <SoftDialog ref="dialogEl">
+  <BasicDialog ref="dialogEl">
     <template v-slot:header>
       <span class="text-4xl">{{ $t('view.game.dialog.winner.heading') }}</span>
     </template>
     <div>{{ $t('view.game.dialog.winner.content') }}</div>
-  </SoftDialog>
+  </BasicDialog>
 </template>

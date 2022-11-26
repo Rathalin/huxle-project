@@ -4,44 +4,75 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        prime: {
-          500: 'hsl(27, 91%, 57%)',
-          600: 'hsl(27, 100%, 67%)',
-        },
         graphite: {
-          400: 'hsl(0, 0%, 40%)',
-          500: 'hsl(0, 0%, 29%)',
-          600: 'hsl(0, 0%, 21%)',
-          700: 'hsl(0deg 0% 16%)',
-          800: 'hsl(0, 0%, 13%)',
-          900: 'hsl(0, 0%, 9%)',
+          100: 'hsl(0, 0%, 70%)',
+          200: 'hsl(0, 0%, 55%)',
+          300: 'hsl(0, 0%, 40%)',
+          400: 'hsl(0, 0%, 29%)',
+          500: 'hsl(0, 0%, 21%)',
+          600: 'hsl(0, 0%, 16%)',
+          700: 'hsl(0, 0%, 13%)',
+          800: 'hsl(0, 0%, 9%)',
+          900: 'hsl(0, 0%, 0%)',
         },
-        letter: {
-          unset: {
-            normal: 'hsl(0, 0%, 40%)',
-            hover: 'hsl(0, 0%, 50%)',
+        light: {
+          letter: {
+            unset: {
+              normal: 'hsl(200, 5%, 65%)',
+              hover: 'hsl(200, 5%, 60%)',
+            },
+            absent: {
+              normal: 'hsl(0, 3%, 60%)',
+              hover: 'hsl(0, 3%, 55%)',
+            },
+            present: {
+              normal: 'hsl(60, 80%, 48%)',
+              hover: 'hsl(60, 75%, 45%)',
+            },
+            correct: {
+              normal: 'hsl(102, 81%, 41%)',
+              hover: 'hsl(102, 75%, 38%)',
+            },
           },
-          absent: {
-            normal: 'hsl(0, 0%, 20%)',
-            hover: 'hsl(0, 0%, 30%)',
-          },
-          present: {
-            normal: 'hsl(60, 62%, 29%)',
-            hover: 'hsl(60, 61%, 42%)',
-          },
-          correct: {
-            normal: 'hsl(102, 79%, 28%)',
-            hover: 'hsl(102, 79%, 38%)',
+          dialog: {
+            backdrop: 'hsla(0, 0%, 10%, 0.75)',
           },
         },
-        dialog: {
-          backdrop: 'hsla(0, 0%, 78%, 0.25)',
+        dark: {
+          letter: {
+            unset: {
+              normal: 'hsl(0, 0%, 40%)',
+              hover: 'hsl(0, 0%, 50%)',
+            },
+            absent: {
+              normal: 'hsl(0, 0%, 20%)',
+              hover: 'hsl(0, 0%, 30%)',
+            },
+            present: {
+              normal: 'hsl(60, 62%, 29%)',
+              hover: 'hsl(60, 61%, 42%)',
+            },
+            correct: {
+              normal: 'hsl(102, 79%, 28%)',
+              hover: 'hsl(102, 79%, 38%)',
+            },
+          },
+          dialog: {
+            backdrop: 'hsla(0, 0%, 80%, 0.25)',
+          },
         },
       },
       textColor: {
-        normal: 'hsl(0, 0%, 87%)',
-        error: 'hsl(0, 91%, 71%)',
-        success: 'hsl(142, 69%, 58%)',
+        light: {
+          normal: 'hsl(0, 0%, 10%)',
+          error: 'hsl(0, 91%, 45%)',
+          success: 'hsl(142, 50%, 40%)',
+        },
+        dark: {
+          normal: 'hsl(0, 0%, 90%)',
+          error: 'hsl(0, 91%, 71%)',
+          success: 'hsl(142, 69%, 58%)',
+        },
       },
       fontFamily: {
         primary: ['Cairo', 'ui-sans-serif', 'system-ui', 'sans-serif'],

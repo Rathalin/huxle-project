@@ -2,7 +2,7 @@
 import { ref } from '@vue/reactivity'
 import IconButton from '@/components/ui/buttons/IconButton.vue'
 import TextInput from '@/components/ui/form/TextInput.vue'
-import SoftDialog from '../../dialogs/SoftDialog.vue'
+import BasicDialog from '../../dialogs/BasicDialog.vue'
 
 const props = defineProps<{
   link: string
@@ -12,7 +12,7 @@ const emits = defineEmits<{
   (e: 'close'): void
 }>()
 
-const dialogEl = ref<InstanceType<typeof SoftDialog>>()
+const dialogEl = ref<InstanceType<typeof BasicDialog>>()
 const showCopiedHint = ref(false)
 
 function openDialog() {
@@ -40,7 +40,7 @@ defineExpose({
 </script>
 
 <template>
-  <SoftDialog ref="dialogEl" @close="onClose">
+  <BasicDialog ref="dialogEl" @close="onClose">
     <template v-slot:header
       ><h1 class="text-xl">{{ $t('view.create.dialog.heading.text') }}</h1>
     </template>
@@ -56,18 +56,11 @@ defineExpose({
     </div>
     <div class="flex flex-col items-center">
       <div
-        class="text-success transition-opacity duration-300"
+        class="text-light-success transition-opacity duration-300 dark:text-dark-success"
         :class="{ 'opacity-0': !showCopiedHint }"
       >
         {{ $t('view.create.dialog.copied.text') }}
       </div>
     </div>
-  </SoftDialog>
+  </BasicDialog>
 </template>
-
-<style scoped>
-dialog::backdrop {
-  backdrop-filter: blur(2px);
-  background-color: rgba(200, 200, 200, 0.25);
-}
-</style>
