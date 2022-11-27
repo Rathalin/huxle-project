@@ -1,8 +1,9 @@
 {
   "header": {
     "locale": {
-      "german": "Deutsch",
-      "english": "Englisch",
+      "de": "Deutsch",
+      "en": "Englisch",
+      "grogu": "Grogu",
       "toggle": "Switch to English"
     },
     "link": {

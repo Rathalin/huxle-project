@@ -1,35 +1,40 @@
 <script setup lang="ts">
 import { computed } from '@vue/reactivity'
 import { useLocaleStore } from '@/stores/locale.store'
-import type { LocaleOption } from '@/locales/i18n'
-import germany from '@/assets/images/countries/germany.png'
-import unitedKingdom from '@/assets/images/countries/united-kingdom.png'
-import grogu from '@/assets/images/grogu-48.png'
-import SubtleButton from '../buttons/SubtleButton.vue'
+import { localeOptions, type LocaleOption } from '@/locales/i18n'
 
-const { $state, toggleLocale } = useLocaleStore()
-const images = new Map<LocaleOption, string>()
-images.set('en', germany)
-images.set('de', unitedKingdom)
-images.set('grogu', grogu)
+const { $state, setLocale } = useLocaleStore()
 
-const selectedLocaleUpper = computed(() => $state.selectedLocale.toUpperCase())
-const selectedLocaleImage = computed(() => images.get($state.selectedLocale))
-
-function onSwitchClick() {
-  toggleLocale()
+function onLocaleChange(e: Event) {
+  const localeValue = (e.currentTarget as HTMLSelectElement)
+    .value as LocaleOption
+  // if (localeValue === 'grogu') return
+  setLocale(localeValue)
 }
 </script>
 
 <template>
   <div>
-    <SubtleButton @click="onSwitchClick">
-      <div class="hidden gap-1 lg:flex">{{ $t('header.locale.toggle') }}</div>
-      <img
-        :src="selectedLocaleImage"
-        :alt="selectedLocaleUpper"
-        class="h-7 select-none"
-      />
-    </SubtleButton>
+    <div class="flex items-center rounded-sm bg-graphite-500 px-2">
+      <i class="material-icons">language</i>
+      <select
+        name="locale"
+        class="bg-graphite-500 focus-visible:outline-none"
+        :value="$state.selectedLocale"
+        @change="onLocaleChange"
+      >
+        <option
+          v-for="localeOption of localeOptions"
+          :value="localeOption"
+          class="rounded-sm"
+          :selected="localeOption === $state.selectedLocale"
+        >
+          <span class="hidden sm:inline">{{
+            $t('header.locale.' + localeOption)
+          }}</span>
+        </option>
+        <option hidden value="grogu">{{ $t('header.locale.grogu') }}</option>
+      </select>
+    </div>
   </div>
 </template>

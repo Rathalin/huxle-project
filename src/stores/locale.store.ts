@@ -10,18 +10,14 @@ import {
 export const useLocaleStore = defineStore('locale', () => {
   const selectedLocale = ref<LocaleOption>('en')
 
-  function toggleLocale() {
-    // Only works with 2 locales
-    selectedLocale.value =
-      localeOptions.find((option) => option != selectedLocale.value) ??
-      defaultLocale
+  function setLocale(locale: LocaleOption) {
+    selectedLocale.value = locale
     i18n.global.locale = selectedLocale.value
   }
 
   function activateSecretGroguLocale() {
-    selectedLocale.value = 'grogu'
-    i18n.global.locale = selectedLocale.value
+    setLocale('grogu')
   }
 
-  return { selectedLocale, toggleLocale, activateSecretGroguLocale }
+  return { selectedLocale, setLocale, activateSecretGroguLocale }
 })
