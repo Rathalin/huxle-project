@@ -2,6 +2,7 @@
 import { computed, ref, watchEffect } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
 import { localeOptions, type LocaleOption } from '@/locales/i18n'
+import DropdownItem from './DropdownItem.vue'
 
 const { $state, setLocale } = useLocaleStore()
 const menuOpen = ref(false)
@@ -28,11 +29,9 @@ async function onMenuBlur(event: FocusEvent) {
 
 watchEffect(() => console.log(menuOpen.value))
 
-function onLocaleChange(e: Event) {
-  const localeValue = (e.currentTarget as HTMLSelectElement)
-    .value as LocaleOption
+function onLocaleChange(localeOption: LocaleOption) {
   // if (localeValue === 'grogu') return
-  setLocale(localeValue)
+  setLocale(localeOption)
 }
 </script>
 
@@ -45,13 +44,12 @@ function onLocaleChange(e: Event) {
   >
     <div @click="toggleMenu">{{ $state.selectedLocale }}</div>
     <menu v-if="menuOpen" class="menu card no-hover flex-col">
-      <li
+      <DropdownItem
         v-for="localeOption in localeOptions"
-        class="rounded-sm"
-        @click="onLocaleChange"
+        @select="() => onLocaleChange(localeOption)"
       >
         <span>{{ $t('header.locale.' + localeOption) }}</span>
-      </li>
+      </DropdownItem>
     </menu>
   </div>
 </template>
