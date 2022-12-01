@@ -12,7 +12,7 @@ const initialY = -20
 const minX = 5
 const maxX = 95
 const fadeAt = 80
-const despawn = 90
+const despawn = 85
 const imageWidthPx = 70
 const maxScreenWidth = 4096
 
