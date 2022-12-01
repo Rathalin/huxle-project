@@ -1,57 +1,36 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed } from '@vue/reactivity'
 import { useLocaleStore } from '@/stores/locale.store'
-import { localeOptions, type LocaleOption } from '@/locales/i18n'
+import type { LocaleOption } from '@/locales/i18n'
+import germany from '@/assets/images/countries/germany.png'
+import unitedKingdom from '@/assets/images/countries/united-kingdom.png'
+import grogu from '@/assets/images/grogu-48.png'
+import SubtleButton from '../buttons/SubtleButton.vue'
 
-const { $state, setLocale } = useLocaleStore()
-const menuOpen = ref(false)
+const { $state, toggleLocale } = useLocaleStore()
+const images = new Map<LocaleOption, string>()
+images.set('en', germany)
+images.set('de', unitedKingdom)
+images.set('grogu', grogu)
 
-function toggleMenu() {
-  menuOpen.value = !menuOpen.value
-}
+const selectedLocaleUpper = computed(() => $state.selectedLocale.toUpperCase())
+const selectedLocaleImage = computed(() => images.get($state.selectedLocale))
 
-function closeMenu() {
-  menuOpen.value = false
-}
-
-async function onMenuBlur(event: FocusEvent) {
-  if (event.currentTarget == null) return
-  const currentTarget = event.currentTarget as HTMLElement
-  // Give browser time to focus the next element
-  requestAnimationFrame(() => {
-    // Check if the new focused element is a child of the original container
-    if (!currentTarget.contains(document.activeElement)) {
-      closeMenu()
-    }
-  })
-}
-
-watchEffect(() => console.log(menuOpen.value))
-
-function onLocaleChange(e: Event) {
-  const localeValue = (e.currentTarget as HTMLSelectElement)
-    .value as LocaleOption
-  // if (localeValue === 'grogu') return
-  setLocale(localeValue)
+function onSwitchClick() {
+  toggleLocale()
 }
 </script>
 
 <template>
-  <div
-    class="z-10 cursor-pointer"
-    tabindex="0"
-    @keydown.enter.self="toggleMenu"
-    @blur="onMenuBlur"
-  >
-    <div @click="toggleMenu">{{ $state.selectedLocale }}</div>
-    <menu v-if="menuOpen" class="menu card no-hover flex-col">
-      <li
-        v-for="localeOption in localeOptions"
-        class="rounded-sm"
-        @click="onLocaleChange"
-      >
-        <span>{{ $t('header.locale.' + localeOption) }}</span>
-      </li>
-    </menu>
+  <div>
+    <SubtleButton @click="onSwitchClick">
+      <div class="flex items-center gap-1">
+        <i class="material-icons">language</i>
+        <div class="flex lg:hidden">{{ $t('header.locale.toggle.short') }}</div>
+        <div class="hidden gap-1 lg:flex">
+          {{ $t('header.locale.toggle.long') }}
+        </div>
+      </div>
+    </SubtleButton>
   </div>
 </template>

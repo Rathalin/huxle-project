@@ -4,7 +4,10 @@
       "de": "German",
       "en": "English",
       "grogu": "Grogu",
-      "toggle": "Exit Grogu Mode"
+      "toggle": {
+        "long": "Exit Grogu Mode",
+        "short": "English"
+      }
     },
     "link": {
       "create": {
