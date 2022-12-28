@@ -3,6 +3,7 @@ import { ref } from '@vue/reactivity'
 import IconButton from '@/components/ui/buttons/IconButton.vue'
 import TextInput from '@/components/ui/form/TextInput.vue'
 import BasicDialog from '../../dialogs/BasicDialog.vue'
+import TextDisplay from '../../form/TextDisplay.vue'
 
 const props = defineProps<{
   link: string
@@ -49,7 +50,7 @@ defineExpose({
       @click="onCopyClick"
       :title="$t('view.create.dialog.copy.title')"
     >
-      <TextInput :input="{ value: link }" class="flex-1" readonly />
+      <TextDisplay :value="link" class="grow" />
       <IconButton>
         <i class="material-icons">content_copy</i>
       </IconButton>

@@ -2,37 +2,33 @@
 import { ref } from '@vue/reactivity'
 
 const props = defineProps<{
+  modelValue: string
+  id?: string
+  name?: string
   label?: string
-  input?: {
-    id?: string
-    name?: string
-    value?: string
-  }
   readonly?: boolean
   errors?: string[]
 }>()
 
 const emits = defineEmits<{
-  (e: 'change', newText: string): void
+  (e: 'update:modelValue', newText: string): void
 }>()
 
-const inputText = ref(props.input?.value ?? '')
-
 function onInputChange(e: Event) {
-  emits('change', (e.target as HTMLInputElement).value)
+  emits('update:modelValue', (e.target as HTMLInputElement).value)
 }
 </script>
 
 <template>
   <div>
-    <label :for="input?.id">{{ label }}</label>
+    <label :for="id">{{ label }}</label>
     <input
       type="text"
-      :id="input?.id"
-      :name="input?.name"
+      :id="id"
+      :name="name"
       class="w-full rounded-sm bg-neutral-300 px-3 py-2 leading-tight outline-1 hover:outline focus-visible:outline focus-visible:outline-amber-600 dark:bg-graphite-500 dark:focus-visible:outline-amber-600"
-      v-model="inputText"
-      @change="onInputChange"
+      :value="modelValue"
+      @input="onInputChange"
       :readonly="readonly === true"
     />
     <div
