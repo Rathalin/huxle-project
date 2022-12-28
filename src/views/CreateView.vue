@@ -4,14 +4,31 @@ import LogoText from '@/components/ui/logo/LogoText.vue'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import LinkDialog from '@/components/ui/main/create/LinkDialog.vue'
 import { ref } from '@vue/reactivity'
+import { computed, reactive, watch } from 'vue'
 
 const HOST_URL = import.meta.env.VITE_HOST_URL ?? 'http://127.0.0.1:5173/'
 
 const linkDialogEl = ref<InstanceType<typeof LinkDialog>>()
 
+const formState = reactive({
+  wordEN: "",
+  wordDE: "",
+});
+
+const createdLink = computed(() => {
+  return `${HOST_URL}play?wordEN=${formState.wordEN}&wordDE=${formState.wordDE}` // toDo encode
+});
+
+const validate = ref(false)
+
 function openDialog() {
-  linkDialogEl.value?.openDialog()
+  validate.value = true;
+  if (formState.wordEN.length == 5 && formState.wordDE.length == 5){
+    
+    linkDialogEl.value?.openDialog()
+  }
 }
+
 </script>
 
 <template>
@@ -25,17 +42,25 @@ function openDialog() {
     <TextInput
       :label="$t('view.create.input.en.label')"
       class="mb-2"
-      :errors="[
-        $t('view.create.input.error.required'),
+      @change="en => (formState.wordEN = en)"
+      :errors="formState.wordEN.length == 5 || !validate ? [] :[
+        formState.wordEN.length == 0 ? $t('view.create.input.error.required') :
         $t('view.create.input.error.length', { length: 5 }),
       ]"
     />
-    <TextInput :label="$t('view.create.input.de.label')" class="mb-2" />
+    <TextInput :label="$t('view.create.input.de.label')" class="mb-2" 
+    @change="de => (formState.wordDE = de)"
+    :errors="formState.wordDE.length == 5 || !validate ? [] :[
+        formState.wordDE.length == 0 ? $t('view.create.input.error.required') :
+        $t('view.create.input.error.length', { length: 5 }),
+      ]"/>
 
     <PrimaryButton @click="openDialog" class="px-7 mt-4">{{
       $t('view.create.submit.label')
     }}</PrimaryButton>
 
-    <LinkDialog :link="`${HOST_URL}play/example-hash`" ref="linkDialogEl" />
+    <!-- <pre>{{ formState }}</pre> -->
+
+    <LinkDialog :link="createdLink" ref="linkDialogEl" />
   </article>
 </template>
