@@ -14,8 +14,9 @@ const formState = reactive({
   wordDE: '',
 })
 
+// the words will be encoded using Base64
 const createdLink = computed(() => {
-  return `${HOST_URL}play?wordEN=${formState.wordEN}&wordDE=${formState.wordDE}` // toDo encode
+  return `${HOST_URL}play?wordEN=${btoa(formState.wordEN)}&wordDE=${btoa(formState.wordDE)}`
 })
 
 const validate = ref(false)
