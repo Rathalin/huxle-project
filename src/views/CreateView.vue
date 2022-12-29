@@ -15,8 +15,6 @@ const formState = reactive({
   wordDE: '',
 })
 
-const route = useRoute()
-
 // the words will be encoded using Base64
 const createdLink = computed(() => {
   return `${HOST_URL}play/${btoa(formState.wordEN)}/${btoa(formState.wordDE)}`
