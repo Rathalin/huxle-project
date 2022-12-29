@@ -17,7 +17,7 @@ const router = createRouter({
       component: CreateView,
     },
     {
-      path: '/play/:hash',
+      path: '/play/:wordEN/:wordDE',
       name: 'game',
       component: GameView,
     },

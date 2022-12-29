@@ -11,7 +11,9 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const hash = route.params.hash
+// the words will be encoded and decoded using Base64
+const wordEN = atob(route.params.wordEN)
+const wordDE = atob(route.params.wordDE)
 
 const invalidLinkDialogEl = ref<InstanceType<typeof InvalidLinkDialog>>()
 const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()

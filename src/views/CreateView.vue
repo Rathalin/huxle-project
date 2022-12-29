@@ -4,6 +4,7 @@ import LogoText from '@/components/ui/logo/LogoText.vue'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import LinkDialog from '@/components/ui/main/create/LinkDialog.vue'
 import { computed, ref, reactive } from 'vue'
+import { useRoute } from 'vue-router'
 
 const HOST_URL = import.meta.env.VITE_HOST_URL ?? 'http://127.0.0.1:5173/'
 
@@ -14,9 +15,11 @@ const formState = reactive({
   wordDE: '',
 })
 
+const route = useRoute()
+
 // the words will be encoded using Base64
 const createdLink = computed(() => {
-  return `${HOST_URL}play?wordEN=${btoa(formState.wordEN)}&wordDE=${btoa(formState.wordDE)}`
+  return `${HOST_URL}play/${btoa(formState.wordEN)}/${btoa(formState.wordDE)}`
 })
 
 const validate = ref(false)
