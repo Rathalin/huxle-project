@@ -11,6 +11,13 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+if (
+  typeof route.params.wordEN !== 'string' ||
+  typeof route.params.wordDE !== 'string'
+)
+  throw new Error(
+    `Param "wordEN" or "wordDE" is not a string. Path: ${route.fullPath}`
+  )
 // the words will be encoded and decoded using Base64
 const wordEN = atob(route.params.wordEN)
 const wordDE = atob(route.params.wordDE)
@@ -23,10 +30,10 @@ const resetWarningDialogEl = ref<InstanceType<typeof ResetWarningDialog>>()
 </script>
 
 <template>
-  <div class="lg:mt-6 flex flex-col items-center">
+  <div class="flex flex-col items-center lg:mt-6">
     <Board />
     <Keyboard :letter-states="{}" />
-    <div class="pt-6 flex flex-wrap gap-2 items-center">
+    <div class="flex flex-wrap items-center gap-2 pt-6">
       <DebugButton @click="() => invalidLinkDialogEl?.openDialog()"
         >Invalid link dialog</DebugButton
       >
