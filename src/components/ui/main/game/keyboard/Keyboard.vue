@@ -7,6 +7,7 @@ defineProps<{
 }>()
 
 defineEmits<{
+  (e: 'keyInput', key: string): void
   (e: 'key', key: string): void
 }>()
 
@@ -18,9 +19,14 @@ const rows = [
 </script>
 
 <template>
-  <div class="mt-4 sm:mt-6 select-none flex flex-col items-center">
-    <div class="flex gap-1 mb-1 touch-manipulation" v-for="(row, i) in rows">
-      <KeyButton v-for="key in row" :key="key" :keyChar="key" />
+  <div class="mt-4 flex select-none flex-col items-center sm:mt-6">
+    <div class="mb-1 flex touch-manipulation gap-1" v-for="row in rows">
+      <KeyButton
+        v-for="letter in row"
+        :key="letter"
+        :keyChar="letter"
+        @key="$emit('keyInput', letter)"
+      />
     </div>
   </div>
 </template>
