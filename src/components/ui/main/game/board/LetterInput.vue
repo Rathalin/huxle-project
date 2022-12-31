@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { LetterStateOption } from './letter-state'
-import Letter from './Letter.vue'
+import Letter from './InputLetter.vue'
 
 export interface LetterState {
   letter?: string

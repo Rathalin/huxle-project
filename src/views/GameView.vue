@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import DebugButton from '@/components/ui/buttons/DebugButton.vue'
-import Board from '@/components/ui/main/game/board/Board.vue'
+import Board from '@/components/ui/main/game/board/WordBoard.vue'
 import InvalidLinkDialog from '@/components/ui/main/game/board/dialogs/InvalidLinkDialog.vue'
 import LoserDialog from '@/components/ui/main/game/board/dialogs/LoserDialog.vue'
 import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWarningDialog.vue'
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
-import Keyboard from '@/components/ui/main/game/keyboard/Keyboard.vue'
+import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
+import { getTime, resetTimer, startTimer, stopTimer } from '@/utils/Timer'
 
 const route = useRoute()
 if (
@@ -29,18 +30,17 @@ const loserDialogEl = ref<InstanceType<typeof LoserDialog>>()
 const statsDialogEl = ref<InstanceType<typeof StatsDialog>>()
 const resetWarningDialogEl = ref<InstanceType<typeof ResetWarningDialog>>()
 
-let currentRowIndex = 0
-let currentRow = 0
+let currentRowIndex = ref(0)
+let currentRow = ref(0)
 
 let keyboardLocked = false
 let rowComplete = false
-let startTime = 0
-let endTime = 0
 
-const { $state } = useWordsStore()
+const { words, solution, resetBoard } = useWordsStore()
 
 onMounted(() => {
-  startTime = Date.now()
+  resetTimer()
+  startTimer()
 })
 
 function pressedKey(letter: string) {
@@ -57,25 +57,24 @@ function addLetter(letter: string) {
   if (keyboardLocked) {
     return
   }
-  console.log($state.words[currentRow])
-  $state.words[currentRow][currentRowIndex][0] = letter
-  currentRowIndex++
-  if (currentRowIndex == 5) {
+  words[currentRow.value][currentRowIndex.value][0] = letter
+  currentRowIndex.value++
+  if (currentRowIndex.value == 5) {
     keyboardLocked = true
     rowComplete = true
   }
 }
 
 function removeLetter() {
-  if (currentRowIndex === 5) {
+  if (currentRowIndex.value === 5) {
     keyboardLocked = false
     rowComplete = false
   }
-  if (currentRowIndex === 0) {
+  if (currentRowIndex.value === 0) {
     return
   }
-  $state.words[currentRow][currentRowIndex - 1][0] = ' '
-  currentRowIndex--
+  words[currentRow.value][currentRowIndex.value - 1][0] = ' '
+  currentRowIndex.value--
 }
 
 function checkWord() {
@@ -83,32 +82,34 @@ function checkWord() {
     return
   }
   const word: string[] = []
-  $state.words[currentRow].forEach((letter) => {
+  words[currentRow.value].forEach((letter) => {
     word.push(letter[0])
   })
-  if (word.join('') === $state.solution) {
+  if (word.join('') === solution) {
     winnerDialogEl.value?.openDialog()
-    endTime = Date.now()
+    stopTimer()
+    resetBoard()
   } else {
-    $state.words[currentRow].forEach((letter, index) => {
+    words[currentRow.value].forEach((letter, index) => {
       letter[1] = checkPresent(letter[0], index)
     })
-    if (currentRow === 5) {
+    if (currentRow.value === 5) {
       loserDialogEl.value.openDialog()
-      endTime = Date.now()
+      stopTimer()
+      resetBoard()
     }
     keyboardLocked = false
     rowComplete = false
-    currentRow++
-    currentRowIndex = 0
+    currentRow.value++
+    currentRowIndex.value = 0
   }
 }
 
 function checkPresent(letter: string, position: number) {
   let letterstate = 'absent'
-  if ($state.solution.includes(letter)) {
+  if (solution.includes(letter)) {
     letterstate = 'present'
-    $state.solution.split('').forEach((element, index) => {
+    solution.split('').forEach((element, index) => {
       if (element === letter && position === index) {
         letterstate = 'correct'
       }
@@ -147,11 +148,7 @@ defineEmits<{
     <InvalidLinkDialog ref="invalidLinkDialogEl" />
     <WinnerDialog ref="winnerDialogEl" />
     <LoserDialog ref="loserDialogEl" />
-    <StatsDialog
-      ref="statsDialogEl"
-      :guesses="currentRow + 1"
-      :time="(endTime - startTime).toString()"
-    />
+    <StatsDialog ref="statsDialogEl" :guesses="currentRow" :time="getTime()" />
     <ResetWarningDialog ref="resetWarningDialogEl" />
   </div>
 </template>

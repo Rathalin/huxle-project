@@ -7,8 +7,13 @@ const { $state } = useWordsStore()
 
 <template>
   <div class="flex flex-col gap-1">
-    <div class="flex flex-row gap-1" v-for="word of $state.words">
-      <LetterInput v-for="key in word" :state="key[1]" :letter="key[0]" />
+    <div class="flex flex-row gap-1" v-for="(word, i) of $state.words" :key="i">
+      <LetterInput
+        v-for="(key, j) in word"
+        :state="key[1]"
+        :letter="key[0]"
+        :key="j"
+      />
     </div>
   </div>
 </template>

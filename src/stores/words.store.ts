@@ -49,5 +49,52 @@ export const useWordsStore = defineStore('words', () => {
 
   const solution = ref('hello')
 
-  return { words, solution }
+  function resetBoard() {
+    words.value = [
+      [
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+      ],
+      [
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+      ],
+      [
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+      ],
+      [
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+      ],
+      [
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+      ],
+      [
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+        ['', 'unset'],
+      ],
+    ]
+  }
+
+  return { words, solution, resetBoard }
 })

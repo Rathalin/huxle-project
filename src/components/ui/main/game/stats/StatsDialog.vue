@@ -2,7 +2,7 @@
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { computed, ref } from 'vue'
-import Board from '../board/Board.vue'
+import Board from '../board/WordBoard.vue'
 
 const props = defineProps<{
   guesses: number

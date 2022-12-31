@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import SecondaryButton from '@/components/ui/buttons/SecondaryButton.vue'
-import Letter from '@/components/ui/main/game/board/Letter.vue'
+import Letter from '@/components/ui/main/game/board/InputLetter.vue'
 </script>
 
 <template>
   <article class="mt-10 flex flex-col items-center">
     <div>
-      <h1 class="text-2xl flex flex-col items-center">
+      <h1 class="flex flex-col items-center text-2xl">
         <span aria-hidden="true">{{ $t('view.home.heading.text') }}</span>
         <span class="hidden" aria-hidden="false">{{
           $t('view.home.heading.aria-text')

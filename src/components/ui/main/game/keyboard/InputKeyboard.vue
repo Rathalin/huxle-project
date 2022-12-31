@@ -20,7 +20,11 @@ const rows = [
 
 <template>
   <div class="mt-4 flex select-none flex-col items-center sm:mt-6">
-    <div class="mb-1 flex touch-manipulation gap-1" v-for="row in rows">
+    <div
+      class="mb-1 flex touch-manipulation gap-1"
+      v-for="row in rows"
+      :key="row"
+    >
       <KeyButton
         v-for="letter in row"
         :key="letter"
