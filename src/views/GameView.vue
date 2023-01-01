@@ -95,7 +95,9 @@ function checkWord() {
     resetBoard()
   } else {
     words[currentRow.value].forEach((letter, index) => {
-      letter[1] = keyboardStates[letter[0]] = checkPresent(letter[0], index)
+      let state = checkPresent(letter[0], index)
+      letter[1] = state
+      setKeyboardState(state, letter[0])
     })
     if (currentRow.value === 5) {
       loserDialogEl.value.openDialog()
@@ -119,10 +121,23 @@ function checkPresent(letter: string, position: number) {
         answerArray.value[index] = null
       }
     })
-    answerArray.value[answerArray.value.indexOf(letter)] = null
+    if (letterstate !== 'correct') {
+      answerArray.value[answerArray.value.indexOf(letter)] = null
+    }
   }
 
   return letterstate
+}
+
+function setKeyboardState(state: string, letter: string) {
+  if (
+    (keyboardStates[letter] && keyboardStates[letter] === 'correct') ||
+    (keyboardStates[letter] && state === 'absent')
+  ) {
+    return
+  } else {
+    keyboardStates[letter] = state
+  }
 }
 
 defineEmits<{
@@ -133,7 +148,7 @@ defineEmits<{
 <template>
   <div class="flex flex-col items-center lg:mt-6">
     <Board />
-    <Keyboard :letter-states="{}" @keyInput="pressedKey" />
+    <Keyboard :letter-states="{ keyboardStates }" @keyInput="pressedKey" />
     <div class="flex flex-wrap items-center gap-2 pt-6">
       <DebugButton @click="() => invalidLinkDialogEl?.openDialog()"
         >Invalid link dialog

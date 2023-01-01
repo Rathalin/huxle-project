@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import KeyButton from './KeyButton.vue'
 
-defineProps<{
+const props = defineProps<{
   letterStates: Record<string, string>
 }>()
 
@@ -28,7 +28,11 @@ const rows = [
         v-for="letter in row"
         :key="letter"
         :keyChar="letter"
-        :state="letterStates[letter] ? letterStates[letter] : 'absent'"
+        :state="
+          props.letterStates.keyboardStates[letter]
+            ? props.letterStates.keyboardStates[letter]
+            : 'absent'
+        "
         @key="$emit('keyInput', letter)"
       />
     </div>
