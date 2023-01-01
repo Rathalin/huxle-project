@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { LetterStateOption } from '../board/letter-state'
 import KeyButton from './KeyButton.vue'
 
 defineProps<{
-  letterStates: Record<string, LetterStateOption>
+  letterStates: Record<string, string>
 }>()
 
 defineEmits<{
@@ -29,6 +28,7 @@ const rows = [
         v-for="letter in row"
         :key="letter"
         :keyChar="letter"
+        :state="letterStates[letter] ? letterStates[letter] : 'absent'"
         @key="$emit('keyInput', letter)"
       />
     </div>

@@ -7,10 +7,10 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, Ref, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
-import { getTime, resetTimer, startTimer, stopTimer } from '@/utils/Timer'
+import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
 
 const route = useRoute()
 if (
@@ -37,6 +37,9 @@ let keyboardLocked = false
 let rowComplete = false
 
 const { words, solution, resetBoard } = useWordsStore()
+
+const keyboardStates: Record<string, string> = {}
+const answerArray: Ref<(string | null)[]> = ref(solution.split(''))
 
 onMounted(() => {
   resetTimer()
@@ -82,6 +85,7 @@ function checkWord() {
     return
   }
   const word: string[] = []
+  answerArray.value = solution.split('')
   words[currentRow.value].forEach((letter) => {
     word.push(letter[0])
   })
@@ -91,7 +95,7 @@ function checkWord() {
     resetBoard()
   } else {
     words[currentRow.value].forEach((letter, index) => {
-      letter[1] = checkPresent(letter[0], index)
+      letter[1] = keyboardStates[letter[0]] = checkPresent(letter[0], index)
     })
     if (currentRow.value === 5) {
       loserDialogEl.value.openDialog()
@@ -107,14 +111,17 @@ function checkWord() {
 
 function checkPresent(letter: string, position: number) {
   let letterstate = 'absent'
-  if (solution.includes(letter)) {
+  if (answerArray.value.includes(letter)) {
     letterstate = 'present'
     solution.split('').forEach((element, index) => {
       if (element === letter && position === index) {
         letterstate = 'correct'
+        answerArray.value[index] = null
       }
     })
+    answerArray.value[answerArray.value.indexOf(letter)] = null
   }
+
   return letterstate
 }
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   keyChar: string
+  state: string
 }>()
 
 defineEmits<{
@@ -10,6 +11,7 @@ defineEmits<{
 
 <template>
   <button
+    :class="state"
     class="key-min-width rounded-sm bg-neutral-300 px-2 py-3 hover:bg-neutral-400 dark:bg-graphite-500 dark:hover:bg-graphite-400 sm:px-4 sm:py-3"
     @click="$emit('key', keyChar)"
   >
