@@ -94,8 +94,14 @@ function checkWord() {
     stopTimer()
     resetBoard()
   } else {
+    let state = 'absent'
     words[currentRow.value].forEach((letter, index) => {
-      let state = checkPresent(letter[0], index)
+      state = checkCorrect(letter[0], index)
+      letter[1] = state
+      setKeyboardState(state, letter[0])
+    })
+    words[currentRow.value].forEach((letter) => {
+      state = checkPresent(letter)
       letter[1] = state
       setKeyboardState(state, letter[0])
     })
@@ -111,21 +117,28 @@ function checkWord() {
   }
 }
 
-function checkPresent(letter: string, position: number) {
+function checkPresent(letter: string[]) {
+  if (letter[1] === 'correct') {
+    return letter[1]
+  }
+  let letterstate = 'absent'
+  if (answerArray.value.includes(letter[0])) {
+    letterstate = 'present'
+    answerArray.value[answerArray.value.indexOf(letter[0])] = null
+  }
+  return letterstate
+}
+
+function checkCorrect(letter: string, position: number) {
   let letterstate = 'absent'
   if (answerArray.value.includes(letter)) {
-    letterstate = 'present'
     solution.split('').forEach((element, index) => {
       if (element === letter && position === index) {
         letterstate = 'correct'
         answerArray.value[index] = null
       }
     })
-    if (letterstate !== 'correct') {
-      answerArray.value[answerArray.value.indexOf(letter)] = null
-    }
   }
-
   return letterstate
 }
 
