@@ -31,7 +31,7 @@ const rows = [
         :state="
           props.letterStates.keyboardStates[letter]
             ? props.letterStates.keyboardStates[letter]
-            : 'absent'
+            : 'unset'
         "
         @key="$emit('keyInput', letter)"
       />
