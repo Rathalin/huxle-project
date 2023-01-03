@@ -162,7 +162,7 @@ defineEmits<{
 <template>
   <div class="flex flex-col items-center lg:mt-6">
     <Board />
-    <Keyboard :letter-states="{ keyboardStates }" @keyInput="pressedKey" />
+    <Keyboard :letter-states="keyboardStates" @keyInput="pressedKey" />
     <div class="flex flex-wrap items-center gap-2 pt-6">
       <DebugButton @click="() => invalidLinkDialogEl?.openDialog()"
         >Invalid link dialog

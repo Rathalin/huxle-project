@@ -29,9 +29,7 @@ const rows = [
         :key="letter"
         :keyChar="letter"
         :state="
-          props.letterStates.keyboardStates[letter]
-            ? props.letterStates.keyboardStates[letter]
-            : 'unset'
+          props.letterStates[letter] ? props.letterStates[letter] : 'unset'
         "
         @key="$emit('keyInput', letter)"
       />
