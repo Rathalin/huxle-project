@@ -21,8 +21,8 @@ const rows = [
   <div class="mt-4 flex select-none flex-col items-center sm:mt-6">
     <div
       class="mb-1 flex touch-manipulation gap-1"
-      v-for="row in rows"
-      :key="row"
+      v-for="(row, index) in rows"
+      :key="index"
     >
       <KeyButton
         v-for="letter in row"

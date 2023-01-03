@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { LetterStateOption } from './letter-state'
 
 export interface LetterState {
   letter?: string
-  state: LetterStateOption
+  state: string
 }
 
-const stateClass: Record<LetterStateOption, string[]> = {
+const stateClass: Record<string, string[]> = {
   unset: [
     'bg-light-letter-unset-normal',
     'hover:bg-light-letter-unset-hover',

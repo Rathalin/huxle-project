@@ -7,10 +7,11 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, Ref, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
 import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
+import type { Ref } from 'vue'
 
 const route = useRoute()
 if (
@@ -106,7 +107,7 @@ function checkWord() {
       setKeyboardState(state, letter[0])
     })
     if (currentRow.value === 5) {
-      loserDialogEl.value.openDialog()
+      loserDialogEl.value?.openDialog()
       stopTimer()
       resetBoard()
     }
