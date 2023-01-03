@@ -7,7 +7,7 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
 import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
@@ -39,7 +39,7 @@ let rowComplete = false
 
 const { words, solution, resetBoard } = useWordsStore()
 
-const keyboardStates: Record<string, string> = {}
+const keyboardStates: Record<string, string> = reactive({})
 const answerArray: Ref<(string | null)[]> = ref(solution.split(''))
 
 onMounted(() => {
