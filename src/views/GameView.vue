@@ -91,8 +91,15 @@ function checkWord() {
     word.push(letter[0])
   })
   if (word.join('') === solution) {
+    words[currentRow.value].forEach((letter) => {
+      letter[1] = 'correct'
+    })
     winnerDialogEl.value?.openDialog()
     stopTimer()
+    setTimeout(() => {
+      winnerDialogEl.value?.closeDialog()
+      statsDialogEl.value?.openDialog()
+    }, 2000)
   } else {
     let state = 'absent'
     words[currentRow.value].forEach((letter, index) => {
@@ -108,6 +115,10 @@ function checkWord() {
     if (currentRow.value === 5) {
       loserDialogEl.value?.openDialog()
       stopTimer()
+      setTimeout(() => {
+        loserDialogEl.value?.closeDialog()
+        statsDialogEl.value?.openDialog()
+      }, 2000)
     }
     keyboardLocked = false
     rowComplete = false
@@ -182,7 +193,11 @@ defineEmits<{
     <InvalidLinkDialog ref="invalidLinkDialogEl" />
     <WinnerDialog ref="winnerDialogEl" />
     <LoserDialog ref="loserDialogEl" />
-    <StatsDialog ref="statsDialogEl" :guesses="currentRow" :time="getTime()" />
+    <StatsDialog
+      ref="statsDialogEl"
+      :guesses="currentRow + 1"
+      :time="getTime()"
+    />
     <ResetWarningDialog ref="resetWarningDialogEl" />
   </div>
 </template>
