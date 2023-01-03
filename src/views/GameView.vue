@@ -37,7 +37,7 @@ let currentRow = ref(0)
 let keyboardLocked = false
 let rowComplete = false
 
-const { words, solution, resetBoard } = useWordsStore()
+const { words, solution } = useWordsStore()
 
 const keyboardStates: Record<string, string> = reactive({})
 const answerArray: Ref<(string | null)[]> = ref(solution.split(''))
@@ -93,7 +93,6 @@ function checkWord() {
   if (word.join('') === solution) {
     winnerDialogEl.value?.openDialog()
     stopTimer()
-    resetBoard()
   } else {
     let state = 'absent'
     words[currentRow.value].forEach((letter, index) => {
@@ -109,7 +108,6 @@ function checkWord() {
     if (currentRow.value === 5) {
       loserDialogEl.value?.openDialog()
       stopTimer()
-      resetBoard()
     }
     keyboardLocked = false
     rowComplete = false
