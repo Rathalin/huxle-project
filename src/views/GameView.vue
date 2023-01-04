@@ -14,6 +14,7 @@ import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
 import { i18n } from '@/locales/i18n'
+import type { LetterStateOption } from '@/components/ui/main/game/board/letter-state'
 
 const route = useRoute()
 if (
@@ -108,7 +109,7 @@ function checkWord() {
       statsDialogEl.value?.openDialog()
     }, 2000)
   } else {
-    let state = 'absent'
+    let state: LetterStateOption = 'absent'
     words[currentRow.value].forEach((letter, index) => {
       state = checkCorrect(letter[0], index)
       letter[1] = state
@@ -138,7 +139,7 @@ function checkPresent(letter: string[]) {
   if (letter[1] === 'correct') {
     return letter[1]
   }
-  let letterstate = 'absent'
+  let letterstate: LetterStateOption = 'absent'
   if (answerArray.value.includes(letter[0])) {
     letterstate = 'present'
     answerArray.value[answerArray.value.indexOf(letter[0])] = null
@@ -147,7 +148,7 @@ function checkPresent(letter: string[]) {
 }
 
 function checkCorrect(letter: string, position: number) {
-  let letterstate = 'absent'
+  let letterstate: LetterStateOption = 'absent'
   if (answerArray.value.includes(letter)) {
     solution.value.split('').forEach((element, index) => {
       if (element === letter && position === index) {

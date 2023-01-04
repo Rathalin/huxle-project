@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LetterInput from './LetterInput.vue'
 import { useWordsStore } from '@/stores/words.store'
+import InputLetter from './InputLetter.vue'
 
 const { $state } = useWordsStore()
 </script>
@@ -8,10 +8,10 @@ const { $state } = useWordsStore()
 <template>
   <div class="flex flex-col gap-1">
     <div class="flex flex-row gap-1" v-for="(word, i) of $state.words" :key="i">
-      <LetterInput
+      <InputLetter
         v-for="(key, j) in word"
-        :state="key[1]"
         :letter="key[0]"
+        :state="key[1]"
         :key="j"
       />
     </div>
