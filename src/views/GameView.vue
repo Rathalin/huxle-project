@@ -12,6 +12,7 @@ import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
 import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
+import { useLocaleStore } from '@/stores/locale.store'
 
 const route = useRoute()
 if (
@@ -21,9 +22,6 @@ if (
   throw new Error(
     `Param "wordEN" or "wordDE" is not a string. Path: ${route.fullPath}`
   )
-// the words will be encoded and decoded using Base64
-const wordEN = atob(route.params.wordEN)
-const wordDE = atob(route.params.wordDE)
 
 const invalidLinkDialogEl = ref<InstanceType<typeof InvalidLinkDialog>>()
 const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()
@@ -37,7 +35,9 @@ let currentRow = ref(0)
 let keyboardLocked = false
 let rowComplete = false
 
-const { words, solution } = useWordsStore()
+const { words, wordEN, wordDE } = useWordsStore()
+const { selectedLocale } = useLocaleStore()
+const solution = selectedLocale === 'en' ? wordEN : wordDE
 
 const keyboardStates: Record<string, string> = reactive({})
 const answerArray: Ref<(string | null)[]> = ref(solution.split(''))
