@@ -50,8 +50,8 @@ export const useWordsStore = defineStore('words', () => {
 
   const route = useRoute()
   // the words will be encoded and decoded using Base64
-  const wordEN = atob(route.params.wordEN)
-  const wordDE = atob(route.params.wordDE)
+  const wordEN = ref(atob(route.params.wordEN.toString()))
+  const wordDE = ref(atob(route.params.wordDE.toString()))
 
   return { words, wordEN, wordDE }
 })
