@@ -7,12 +7,13 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
 import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
+import { i18n } from '@/locales/i18n'
 
 const route = useRoute()
 if (
@@ -36,11 +37,17 @@ let keyboardLocked = false
 let rowComplete = false
 
 const { words, wordEN, wordDE } = useWordsStore()
-const { selectedLocale } = useLocaleStore()
-const solution = selectedLocale === 'en' ? wordEN : wordDE
+const solution = i18n.global.locale === 'en' ? ref(wordEN) : ref(wordDE)
 
 const keyboardStates: Record<string, string> = reactive({})
-const answerArray: Ref<(string | null)[]> = ref(solution.split(''))
+const answerArray: Ref<(string | null)[]> = ref(solution.value.split(''))
+
+watch(
+  () => i18n.global.locale,
+  () => {
+    solution.value = i18n.global.locale === 'en' ? wordEN : wordDE
+  }
+)
 
 onMounted(() => {
   resetTimer()
@@ -86,11 +93,11 @@ function checkWord() {
     return
   }
   const word: string[] = []
-  answerArray.value = solution.split('')
+  answerArray.value = solution.value.split('')
   words[currentRow.value].forEach((letter) => {
     word.push(letter[0])
   })
-  if (word.join('') === solution) {
+  if (word.join('') === solution.value) {
     words[currentRow.value].forEach((letter) => {
       letter[1] = 'correct'
     })
@@ -142,7 +149,7 @@ function checkPresent(letter: string[]) {
 function checkCorrect(letter: string, position: number) {
   let letterstate = 'absent'
   if (answerArray.value.includes(letter)) {
-    solution.split('').forEach((element, index) => {
+    solution.value.split('').forEach((element, index) => {
       if (element === letter && position === index) {
         letterstate = 'correct'
         answerArray.value[index] = null
