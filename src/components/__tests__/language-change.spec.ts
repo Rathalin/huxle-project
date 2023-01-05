@@ -2,7 +2,7 @@
 // export default {} as never
 
 import { mount  } from '@vue/test-utils'
-import LocaleSwitcher from '../../components/ui/header/LocaleSwitcher.vue'
+import LocaleSwitcher from '../ui/header/LocaleSwitcher.vue'
 import { describe, expect, test, it, beforeEach } from 'vitest';
 import { i18n } from '../../locales/i18n';
 import { setActivePinia, createPinia } from 'pinia'
@@ -17,12 +17,14 @@ describe('LocaleSwitcher.vue', () => {
         setActivePinia(createPinia())
       })
 
-    test('should render current locale', async () => {
+    test('should change current locale', async () => {
     const wrapper = mount(LocaleSwitcher as any, { global: { plugins: [i18n] } });
     expect(i18n.global.locale).toBe('en')
     const langButton = wrapper.find('button')
     expect(langButton).toBeDefined();
+    expect(langButton.text()).toContain('Deutsch')
     await langButton!.trigger('click')
     expect(i18n.global.locale).toBe('de')
+    expect(langButton.text()).toContain('English')
     });
   });
