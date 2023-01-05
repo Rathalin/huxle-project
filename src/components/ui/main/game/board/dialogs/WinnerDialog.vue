@@ -19,7 +19,7 @@ defineExpose({
 </script>
 
 <template>
-  <BasicDialog ref="dialogEl">
+  <BasicDialog ref="dialogEl" :closable="false">
     <template v-slot:header>
       <span class="text-4xl">{{ $t('view.game.dialog.winner.heading') }}</span>
     </template>

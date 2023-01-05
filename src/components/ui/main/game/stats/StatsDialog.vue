@@ -3,6 +3,7 @@ import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { useWordsStore } from '@/stores/words.store'
 import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import type { LetterStateOption } from '../board/letter-state'
 import Board from '../board/WordBoard.vue'
 
@@ -15,6 +16,7 @@ const dialogEl = ref<InstanceType<typeof BasicDialog>>()
 const showCopiedHint = ref(false)
 
 const wordsStore = useWordsStore()
+const route = useRoute()
 
 function openDialog() {
   dialogEl.value?.openDialog()
@@ -40,7 +42,7 @@ const statsString = computed(() => {
     }
   })
   lines.push(``)
-  lines.push(`huxle.vercel.app`)
+  lines.push(`https://huxle.vercel.app${route.fullPath}`)
   return lines.join('\n')
 })
 

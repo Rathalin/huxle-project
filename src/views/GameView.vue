@@ -15,6 +15,7 @@ import type { Ref } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
 import { i18n } from '@/locales/i18n'
 import type { LetterStateOption } from '@/components/ui/main/game/board/letter-state'
+import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 
 const route = useRoute()
 if (
@@ -31,8 +32,9 @@ const loserDialogEl = ref<InstanceType<typeof LoserDialog>>()
 const statsDialogEl = ref<InstanceType<typeof StatsDialog>>()
 const resetWarningDialogEl = ref<InstanceType<typeof ResetWarningDialog>>()
 
-let currentRowIndex = ref(0)
-let currentRow = ref(0)
+const currentRowIndex = ref(0)
+const currentRow = ref(0)
+const gameDone = ref(false)
 
 let keyboardLocked = false
 let rowComplete = false
@@ -113,6 +115,7 @@ function checkWord() {
     words[currentRow.value].forEach((letter) => {
       letter[1] = 'correct'
     })
+    gameDone.value = true
     winnerDialogEl.value?.openDialog()
     stopTimer()
     setTimeout(() => {
@@ -132,6 +135,7 @@ function checkWord() {
       setKeyboardState(state, letter[0])
     })
     if (currentRow.value === 5) {
+      gameDone.value = true
       loserDialogEl.value?.openDialog()
       stopTimer()
       setTimeout(() => {
@@ -191,23 +195,13 @@ defineEmits<{
   <div class="flex flex-col items-center lg:mt-6">
     <Board />
     <Keyboard :letter-states="keyboardStates" @keyInput="pressedKey" />
-    <div class="flex flex-wrap items-center gap-2 pt-6">
-      <DebugButton @click="() => invalidLinkDialogEl?.openDialog()"
-        >Invalid link dialog
-      </DebugButton>
-      <DebugButton @click="() => winnerDialogEl?.openDialog()"
-        >Winner dialog
-      </DebugButton>
-      <DebugButton @click="() => loserDialogEl?.openDialog()"
-        >Loser dialog
-      </DebugButton>
-      <DebugButton @click="() => statsDialogEl?.openDialog()"
-        >Stats dialog
-      </DebugButton>
-      <DebugButton @click="() => resetWarningDialogEl?.openDialog()"
-        >Reset warning dialog
-      </DebugButton>
-    </div>
+    <PrimaryButton
+      v-if="gameDone"
+      class="mt-2 px-6"
+      @click="statsDialogEl?.openDialog()"
+    >
+      Stats
+    </PrimaryButton>
 
     <InvalidLinkDialog ref="invalidLinkDialogEl" />
     <WinnerDialog ref="winnerDialogEl" />
