@@ -40,7 +40,7 @@ let rowComplete = false
 const { words, wordEN, wordDE } = useWordsStore()
 const solution = i18n.global.locale === 'en' ? ref(wordEN) : ref(wordDE)
 
-const keyboardStates: Record<string, string> = reactive({})
+const keyboardStates: Record<string, LetterStateOption> = reactive({})
 const answerArray: Ref<(string | null)[]> = ref(solution.value.split(''))
 
 watch(
@@ -160,7 +160,7 @@ function checkCorrect(letter: string, position: number) {
   return letterstate
 }
 
-function setKeyboardState(state: string, letter: string) {
+function setKeyboardState(state: LetterStateOption, letter: string) {
   if (
     (keyboardStates[letter] && keyboardStates[letter] === 'correct') ||
     (keyboardStates[letter] && state === 'absent')
@@ -205,6 +205,7 @@ defineEmits<{
       ref="statsDialogEl"
       :guesses="currentRow + 1"
       :time="getTime()"
+      :letter-states="keyboardStates"
     />
     <ResetWarningDialog ref="resetWarningDialogEl" />
   </div>

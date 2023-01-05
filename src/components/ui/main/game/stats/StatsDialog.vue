@@ -2,12 +2,13 @@
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { computed, ref } from 'vue'
+import type { LetterStateOption } from '../board/letter-state'
 import Board from '../board/WordBoard.vue'
 
 const props = defineProps<{
   guesses: number
   time: string
-  // letterStates: Record<string, LetterStateOption>
+  letterStates: Record<string, LetterStateOption>
 }>()
 
 const dialogEl = ref<InstanceType<typeof BasicDialog>>()
@@ -25,6 +26,7 @@ const statsString = computed(() => {
   const lines: string[] = []
   lines.push(`Guesses: ${props.guesses}`)
   lines.push(`Time: ${props.time}`)
+  console.log(props.letterStates.value)
   return lines.join('\n')
 })
 
