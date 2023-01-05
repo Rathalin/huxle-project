@@ -53,7 +53,18 @@ watch(
 onMounted(() => {
   resetTimer()
   startTimer()
+  checkValidLink()
 })
+
+function checkValidLink() {
+  const specialCharacters = /[`!@#$%^&*()_+\-=\\|,.<>?~]/
+  if (wordEN.length !== 5 || wordDE.length !== 5) {
+    invalidLinkDialogEl.value?.openDialog()
+  }
+  if (specialCharacters.test(wordEN) || specialCharacters.test(wordDE)) {
+    invalidLinkDialogEl.value?.openDialog()
+  }
+}
 
 function pressedKey(letter: string) {
   if (letter === 'Backspace') {
