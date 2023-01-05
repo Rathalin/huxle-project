@@ -205,7 +205,6 @@ defineEmits<{
       ref="statsDialogEl"
       :guesses="currentRow + 1"
       :time="getTime()"
-      :letter-states="keyboardStates"
     />
     <ResetWarningDialog ref="resetWarningDialogEl" />
   </div>
