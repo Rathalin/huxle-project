@@ -18,12 +18,12 @@ module.exports = {
         light: {
           letter: {
             unset: {
-              normal: 'hsl(200, 5%, 65%)',
-              hover: 'hsl(200, 5%, 60%)',
-            },
-            absent: {
               normal: 'hsl(0, 3%, 60%)',
               hover: 'hsl(0, 3%, 55%)',
+            },
+            absent: {
+              normal: 'hsl(200, 5%, 65%)',
+              hover: 'hsl(200, 5%, 60%)',
             },
             present: {
               normal: 'hsl(60, 80%, 48%)',
@@ -41,12 +41,12 @@ module.exports = {
         dark: {
           letter: {
             unset: {
-              normal: 'hsl(0, 0%, 40%)',
-              hover: 'hsl(0, 0%, 50%)',
-            },
-            absent: {
               normal: 'hsl(0, 0%, 20%)',
               hover: 'hsl(0, 0%, 30%)',
+            },
+            absent: {
+              normal: 'hsl(0, 0%, 40%)',
+              hover: 'hsl(0, 0%, 50%)',
             },
             present: {
               normal: 'hsl(60, 62%, 29%)',
