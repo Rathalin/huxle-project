@@ -7,7 +7,7 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
 import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
@@ -16,15 +16,6 @@ import { useLocaleStore } from '@/stores/locale.store'
 import { i18n } from '@/locales/i18n'
 import type { LetterStateOption } from '@/components/ui/main/game/board/letter-state'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
-
-const route = useRoute()
-if (
-  typeof route.params.wordEN !== 'string' ||
-  typeof route.params.wordDE !== 'string'
-)
-  throw new Error(
-    `Param "wordEN" or "wordDE" is not a string. Path: ${route.fullPath}`
-  )
 
 const invalidLinkDialogEl = ref<InstanceType<typeof InvalidLinkDialog>>()
 const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()
@@ -45,11 +36,10 @@ const solution = i18n.global.locale === 'en' ? ref(wordEN) : ref(wordDE)
 const keyboardStates: Record<string, LetterStateOption> = reactive({})
 const answerArray: Ref<(string | null)[]> = ref(solution.value.split(''))
 
-watch(
-  () => i18n.global.locale,
-  () => {
-    solution.value = i18n.global.locale === 'en' ? wordEN : wordDE
-  }
+const localeStore = useLocaleStore()
+localeStore.$subscribe(
+  (_, state) =>
+    (solution.value = state.selectedLocale === 'en' ? wordEN : wordDE)
 )
 
 onMounted(() => {
