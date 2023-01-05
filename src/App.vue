@@ -7,8 +7,8 @@ import { computed, onMounted, ref } from 'vue'
 import BasicDialog from './components/ui/dialogs/BasicDialog.vue'
 import EasterEgg from './components/ui/easter-egg/EasterEgg.vue'
 
-const { $state } = useLocaleStore()
-const isGroguMode = computed(() => $state.selectedLocale === 'grogu')
+const localeStore = useLocaleStore()
+const isGroguMode = computed(() => localeStore.selectedLocale === 'grogu')
 
 const dialogEl = ref<InstanceType<typeof BasicDialog>>()
 
