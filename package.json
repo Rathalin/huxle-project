@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
-    "@types/jest": "^29.2.5",
     "@types/jsdom": "^20.0.0",
     "@types/node": "^16.11.68",
     "@vitejs/plugin-vue": "^3.1.2",
@@ -30,7 +29,6 @@
     "autoprefixer": "^10.4.13",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
-    "jest": "^29.3.1",
     "jsdom": "^20.0.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.19",
