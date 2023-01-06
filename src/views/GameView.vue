@@ -8,18 +8,25 @@ import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useWordsStore } from '@/stores/words.store'
-import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
+import { useTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
 import { i18n } from '@/locales/i18n'
 import type { LetterStateOption } from '@/components/ui/main/game/board/letter-state'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
+import { useLocalStorageSupport } from '@/composables/LocalStorageSupport'
 
 const invalidLinkDialogEl = ref<InstanceType<typeof InvalidLinkDialog>>()
 const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()
 const loserDialogEl = ref<InstanceType<typeof LoserDialog>>()
 const statsDialogEl = ref<InstanceType<typeof StatsDialog>>()
 const resetWarningDialogEl = ref<InstanceType<typeof ResetWarningDialog>>()
+const { getTime, stopTimer, startTimer, resetTimer } = useTimer()
+const {
+  initializeVariablesFromLocalStorage,
+  saveVariablesToLocalStorage,
+  clearLocalStorage,
+} = useLocalStorageSupport()
 
 const currentRowIndex = ref(0)
 const currentRow = ref(0)
@@ -44,8 +51,8 @@ localeStore.$subscribe(
 )
 
 const keyBoardInput = (e: KeyboardEvent) => {
-  const alphaRegex = /[a-zA-Z]/
-  if (alphaRegex.test(e.key)) {
+  const alphaRegex = /^[A-Za-z]$/
+  if (alphaRegex.test(e.key) || e.key === 'Backspace' || e.key === 'Enter') {
     pressedKey(e.key)
   }
 }
@@ -53,12 +60,24 @@ window.addEventListener('keyup', keyBoardInput)
 
 onUnmounted(() => {
   window.removeEventListener('keyup', keyBoardInput)
+  if (!gameDone.value) {
+    const stateObject = {
+      currentRow: currentRow.value,
+      currentRowIndex: currentRowIndex.value,
+      words: words,
+      solution: solution.value,
+      keyboardStates: keyboardStates,
+      answerArray: answerArray.value,
+    }
+    saveVariablesToLocalStorage(stateObject)
+  }
 })
 
 onMounted(() => {
   resetTimer()
   startTimer()
   checkValidLink()
+  initializeVariables()
 })
 
 function checkValidLink() {
@@ -69,6 +88,29 @@ function checkValidLink() {
   if (specialCharacters.test(wordEN) || specialCharacters.test(wordDE)) {
     invalidLinkDialogEl.value?.openDialog()
   }
+}
+
+function initializeVariables() {
+  const localStorageResult = initializeVariablesFromLocalStorage()
+  if (localStorageResult) {
+    const states = JSON.parse(localStorageResult)
+    currentRow.value = states.currentRow
+    currentRowIndex.value = states.currentRowIndex
+    solution.value = states.solution
+    answerArray.value = states.answerArray
+
+    words.forEach((row, i) => {
+      row.forEach((letter, j) => {
+        letter[0] = states.words[i][j][0]
+        letter[1] = states.words[i][j][1]
+      })
+    })
+
+    for (let letter in Object.keys(keyboardStates)) {
+      setKeyboardState(Object.values(keyboardStates)[letter], letter)
+    }
+  }
+  clearLocalStorage()
 }
 
 function pressedKey(letter: string) {
@@ -121,6 +163,7 @@ function checkWord() {
     gameDone.value = true
     winnerDialogEl.value?.openDialog()
     stopTimer()
+    clearLocalStorage()
     setTimeout(() => {
       winnerDialogEl.value?.closeDialog()
       statsDialogEl.value?.openDialog()
@@ -141,6 +184,7 @@ function checkWord() {
       gameDone.value = true
       loserDialogEl.value?.openDialog()
       stopTimer()
+      clearLocalStorage()
       setTimeout(() => {
         loserDialogEl.value?.closeDialog()
         statsDialogEl.value?.openDialog()
