@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DebugButton from '@/components/ui/buttons/DebugButton.vue'
 import Board from '@/components/ui/main/game/board/WordBoard.vue'
 import InvalidLinkDialog from '@/components/ui/main/game/board/dialogs/InvalidLinkDialog.vue'
 import LoserDialog from '@/components/ui/main/game/board/dialogs/LoserDialog.vue'
@@ -8,7 +7,6 @@ import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.v
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
 import { onMounted, reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { useWordsStore } from '@/stores/words.store'
 import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
@@ -31,7 +29,10 @@ let keyboardLocked = false
 let rowComplete = false
 
 const { words, wordEN, wordDE } = useWordsStore()
-const solution = i18n.global.locale === 'en' ? ref(wordEN) : ref(wordDE)
+const solution =
+  i18n.global.locale === 'en'
+    ? ref(wordEN.toLowerCase())
+    : ref(wordDE.toLowerCase())
 
 const keyboardStates: Record<string, LetterStateOption> = reactive({})
 const answerArray: Ref<(string | null)[]> = ref(solution.value.split(''))
