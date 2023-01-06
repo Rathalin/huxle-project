@@ -43,16 +43,16 @@ localeStore.$subscribe(
     (solution.value = state.selectedLocale === 'en' ? wordEN : wordDE)
 )
 
-const onKeyup = (e: KeyboardEvent) => {
+const keyBoardInput = (e: KeyboardEvent) => {
   const alphaRegex = /[a-zA-Z]/
   if (alphaRegex.test(e.key)) {
     pressedKey(e.key)
   }
 }
-window.addEventListener('keyup', onKeyup)
+window.addEventListener('keyup', keyBoardInput)
 
 onUnmounted(() => {
-  window.removeEventListener('keyup', onKeyup)
+  window.removeEventListener('keyup', keyBoardInput)
 })
 
 onMounted(() => {
