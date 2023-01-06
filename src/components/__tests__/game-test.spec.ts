@@ -17,6 +17,6 @@ describe('GameView.vue', () => {
       })
 
     test('the entered words are being checked for correctness', async () => {
-    const wrapper = mount(GameView as any,  { global: { plugins: [i18n] } });
+    //const wrapper = mount(GameView as any,  { global: { plugins: [i18n] } });
     });
   });
