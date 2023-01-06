@@ -47,7 +47,10 @@ const answerArray: Ref<(string | null)[]> = ref(solution.value.split(''))
 const localeStore = useLocaleStore()
 localeStore.$subscribe(
   (_, state) =>
-    (solution.value = state.selectedLocale === 'en' ? wordEN : wordDE)
+    (solution.value =
+      state.selectedLocale === 'en'
+        ? wordEN.toLowerCase()
+        : wordDE.toLowerCase())
 )
 
 const keyBoardInput = (e: KeyboardEvent) => {
