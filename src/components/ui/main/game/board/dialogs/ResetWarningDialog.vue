@@ -3,10 +3,13 @@ import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import SecondaryButton from '@/components/ui/buttons/SecondaryButton.vue'
 import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { ref } from 'vue'
+import { useLocaleStore } from '@/stores/locale.store'
 
 const dialogEl = ref<InstanceType<typeof BasicDialog>>()
+const { toggleLocale } = useLocaleStore()
 
 function onConfirmClick(_e: Event) {
+  toggleLocale()
   dialogEl.value?.closeDialog()
 }
 

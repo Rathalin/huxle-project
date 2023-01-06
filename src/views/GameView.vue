@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DebugButton from '@/components/ui/buttons/DebugButton.vue'
 import Board from '@/components/ui/main/game/board/WordBoard.vue'
 import InvalidLinkDialog from '@/components/ui/main/game/board/dialogs/InvalidLinkDialog.vue'
 import LoserDialog from '@/components/ui/main/game/board/dialogs/LoserDialog.vue'
@@ -7,53 +6,118 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, reactive, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useWordsStore } from '@/stores/words.store'
-import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
+import { useTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
 import { i18n } from '@/locales/i18n'
 import type { LetterStateOption } from '@/components/ui/main/game/board/letter-state'
-
-const route = useRoute()
-if (
-  typeof route.params.wordEN !== 'string' ||
-  typeof route.params.wordDE !== 'string'
-)
-  throw new Error(
-    `Param "wordEN" or "wordDE" is not a string. Path: ${route.fullPath}`
-  )
+import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
+import { useLocalStorageSupport } from '@/composables/LocalStorageSupport'
 
 const invalidLinkDialogEl = ref<InstanceType<typeof InvalidLinkDialog>>()
 const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()
 const loserDialogEl = ref<InstanceType<typeof LoserDialog>>()
 const statsDialogEl = ref<InstanceType<typeof StatsDialog>>()
 const resetWarningDialogEl = ref<InstanceType<typeof ResetWarningDialog>>()
+const { getTime, stopTimer, startTimer, resetTimer } = useTimer()
+const {
+  initializeVariablesFromLocalStorage,
+  saveVariablesToLocalStorage,
+  clearLocalStorage,
+} = useLocalStorageSupport()
 
-let currentRowIndex = ref(0)
-let currentRow = ref(0)
+const currentRowIndex = ref(0)
+const currentRow = ref(0)
+const gameDone = ref(false)
 
 let keyboardLocked = false
 let rowComplete = false
 
 const { words, wordEN, wordDE } = useWordsStore()
-const solution = i18n.global.locale === 'en' ? ref(wordEN) : ref(wordDE)
+const solution =
+  i18n.global.locale === 'en'
+    ? ref(wordEN.toLowerCase())
+    : ref(wordDE.toLowerCase())
 
 const keyboardStates: Record<string, LetterStateOption> = reactive({})
 const answerArray: Ref<(string | null)[]> = ref(solution.value.split(''))
 
-watch(
-  () => i18n.global.locale,
-  () => {
-    solution.value = i18n.global.locale === 'en' ? wordEN : wordDE
-  }
+const localeStore = useLocaleStore()
+localeStore.$subscribe(
+  (_, state) =>
+    (solution.value = state.selectedLocale === 'en' ? wordEN : wordDE)
 )
+
+const keyBoardInput = (e: KeyboardEvent) => {
+  const alphaRegex = /^[A-Za-z]$/
+  if (alphaRegex.test(e.key) || e.key === 'Backspace' || e.key === 'Enter') {
+    pressedKey(e.key)
+  }
+}
+window.addEventListener('keyup', keyBoardInput)
+
+onUnmounted(() => {
+  window.removeEventListener('keyup', keyBoardInput)
+  if (!gameDone.value) {
+    const stateObject = {
+      currentRow: currentRow.value,
+      currentRowIndex: currentRowIndex.value,
+      words: words,
+      solution: solution.value,
+      keyboardStates: keyboardStates,
+      answerArray: answerArray.value,
+      keyboardLocked: keyboardLocked,
+      rowComplete: rowComplete,
+    }
+    saveVariablesToLocalStorage(stateObject)
+  }
+})
 
 onMounted(() => {
   resetTimer()
   startTimer()
+  checkValidLink()
+  initializeVariables()
 })
+
+function checkValidLink() {
+  const specialCharacters = /[`!@#$%^&*()_+\-=\\|,.<>?~]/
+  if (wordEN.length !== 5 || wordDE.length !== 5) {
+    invalidLinkDialogEl.value?.openDialog()
+  }
+  if (specialCharacters.test(wordEN) || specialCharacters.test(wordDE)) {
+    invalidLinkDialogEl.value?.openDialog()
+  }
+}
+
+function initializeVariables() {
+  const localStorageResult = initializeVariablesFromLocalStorage()
+  if (localStorageResult) {
+    const states = JSON.parse(localStorageResult)
+    if (states.solution === solution) {
+      currentRow.value = states.currentRow
+      currentRowIndex.value = states.currentRowIndex
+      solution.value = states.solution
+      answerArray.value = states.answerArray
+      keyboardLocked = states.keyboardLocked
+      rowComplete = states.rowComplete
+
+      words.forEach((row, i) => {
+        row.forEach((letter, j) => {
+          letter[0] = states.words[i][j][0]
+          letter[1] = states.words[i][j][1]
+        })
+      })
+
+      for (let letter in Object.keys(keyboardStates)) {
+        setKeyboardState(Object.values(keyboardStates)[letter], letter)
+      }
+    }
+  }
+  clearLocalStorage()
+}
 
 function pressedKey(letter: string) {
   if (letter === 'Backspace') {
@@ -102,8 +166,10 @@ function checkWord() {
     words[currentRow.value].forEach((letter) => {
       letter[1] = 'correct'
     })
+    gameDone.value = true
     winnerDialogEl.value?.openDialog()
     stopTimer()
+    clearLocalStorage()
     setTimeout(() => {
       winnerDialogEl.value?.closeDialog()
       statsDialogEl.value?.openDialog()
@@ -121,8 +187,10 @@ function checkWord() {
       setKeyboardState(state, letter[0])
     })
     if (currentRow.value === 5) {
+      gameDone.value = true
       loserDialogEl.value?.openDialog()
       stopTimer()
+      clearLocalStorage()
       setTimeout(() => {
         loserDialogEl.value?.closeDialog()
         statsDialogEl.value?.openDialog()
@@ -180,23 +248,13 @@ defineEmits<{
   <div class="flex flex-col items-center lg:mt-6">
     <Board />
     <Keyboard :letter-states="keyboardStates" @keyInput="pressedKey" />
-    <div class="flex flex-wrap items-center gap-2 pt-6">
-      <DebugButton @click="() => invalidLinkDialogEl?.openDialog()"
-        >Invalid link dialog
-      </DebugButton>
-      <DebugButton @click="() => winnerDialogEl?.openDialog()"
-        >Winner dialog
-      </DebugButton>
-      <DebugButton @click="() => loserDialogEl?.openDialog()"
-        >Loser dialog
-      </DebugButton>
-      <DebugButton @click="() => statsDialogEl?.openDialog()"
-        >Stats dialog
-      </DebugButton>
-      <DebugButton @click="() => resetWarningDialogEl?.openDialog()"
-        >Reset warning dialog
-      </DebugButton>
-    </div>
+    <PrimaryButton
+      v-if="gameDone"
+      class="mt-2 px-6"
+      @click="statsDialogEl?.openDialog()"
+    >
+      Stats
+    </PrimaryButton>
 
     <InvalidLinkDialog ref="invalidLinkDialogEl" />
     <WinnerDialog ref="winnerDialogEl" />

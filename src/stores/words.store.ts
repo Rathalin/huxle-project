@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router'
 export const useWordsStore = defineStore('words', () => {
   const rows: [string, LetterStateOption][][] = []
   for (let row = 0; row < 6; row++) {
-    let cols: [string, LetterStateOption][] = []
+    const cols: [string, LetterStateOption][] = []
     for (let col = 0; col < 5; col++) {
       cols.push(['', 'unset'])
     }

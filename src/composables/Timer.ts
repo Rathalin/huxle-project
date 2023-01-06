@@ -2,18 +2,27 @@ import { useStopwatch } from 'vue-timer-hook'
 
 const stopwatch = useStopwatch()
 
-export function getTime() {
-  return stopwatch.minutes.value + ':' + stopwatch.seconds.value
-}
+export function useTimer() {
+  function getTime() {
+    return stopwatch.minutes.value + ':' + stopwatch.seconds.value
+  }
 
-export function stopTimer() {
-  stopwatch.pause()
-}
+  function stopTimer() {
+    stopwatch.pause()
+  }
 
-export function startTimer() {
-  stopwatch.start()
-}
+  function startTimer() {
+    stopwatch.start()
+  }
 
-export function resetTimer() {
-  stopwatch.reset()
+  function resetTimer() {
+    stopwatch.reset()
+  }
+
+  return {
+    getTime,
+    stopTimer,
+    startTimer,
+    resetTimer,
+  }
 }

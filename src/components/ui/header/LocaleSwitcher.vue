@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { useLocaleStore } from '@/stores/locale.store'
 import SubtleButton from '../buttons/SubtleButton.vue'
+import ResetWarningDialog from '../main/game/board/dialogs/ResetWarningDialog.vue'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 const { toggleLocale } = useLocaleStore()
+const route = useRoute()
+const resetWarningDialogEl = ref<InstanceType<typeof ResetWarningDialog>>()
 
 function onSwitchClick() {
-  toggleLocale()
+  const path = computed(() => route.path)
+  if (path.value.includes('play')) {
+    resetWarningDialogEl.value?.openDialog()
+  } else {
+    toggleLocale()
+  }
 }
 </script>
 
@@ -20,5 +30,6 @@ function onSwitchClick() {
         </div>
       </div>
     </SubtleButton>
+    <ResetWarningDialog ref="resetWarningDialogEl" />
   </div>
 </template>
