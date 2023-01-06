@@ -96,22 +96,24 @@ function initializeVariables() {
   const localStorageResult = initializeVariablesFromLocalStorage()
   if (localStorageResult) {
     const states = JSON.parse(localStorageResult)
-    currentRow.value = states.currentRow
-    currentRowIndex.value = states.currentRowIndex
-    solution.value = states.solution
-    answerArray.value = states.answerArray
-    keyboardLocked = states.keyboardLocked
-    rowComplete = states.rowComplete
+    if (states.solution === solution) {
+      currentRow.value = states.currentRow
+      currentRowIndex.value = states.currentRowIndex
+      solution.value = states.solution
+      answerArray.value = states.answerArray
+      keyboardLocked = states.keyboardLocked
+      rowComplete = states.rowComplete
 
-    words.forEach((row, i) => {
-      row.forEach((letter, j) => {
-        letter[0] = states.words[i][j][0]
-        letter[1] = states.words[i][j][1]
+      words.forEach((row, i) => {
+        row.forEach((letter, j) => {
+          letter[0] = states.words[i][j][0]
+          letter[1] = states.words[i][j][1]
+        })
       })
-    })
 
-    for (let letter in Object.keys(keyboardStates)) {
-      setKeyboardState(Object.values(keyboardStates)[letter], letter)
+      for (let letter in Object.keys(keyboardStates)) {
+        setKeyboardState(Object.values(keyboardStates)[letter], letter)
+      }
     }
   }
   clearLocalStorage()
