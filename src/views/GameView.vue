@@ -6,7 +6,7 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useWordsStore } from '@/stores/words.store'
 import { getTime, resetTimer, startTimer, stopTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
@@ -42,6 +42,18 @@ localeStore.$subscribe(
   (_, state) =>
     (solution.value = state.selectedLocale === 'en' ? wordEN : wordDE)
 )
+
+const onKeyup = (e: KeyboardEvent) => {
+  const alphaRegex = /[a-zA-Z]/
+  if (alphaRegex.test(e.key)) {
+    pressedKey(e.key)
+  }
+}
+window.addEventListener('keyup', onKeyup)
+
+onUnmounted(() => {
+  window.removeEventListener('keyup', onKeyup)
+})
 
 onMounted(() => {
   resetTimer()
