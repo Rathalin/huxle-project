@@ -68,6 +68,8 @@ onUnmounted(() => {
       solution: solution.value,
       keyboardStates: keyboardStates,
       answerArray: answerArray.value,
+      keyboardLocked: keyboardLocked,
+      rowComplete: rowComplete,
     }
     saveVariablesToLocalStorage(stateObject)
   }
@@ -98,6 +100,8 @@ function initializeVariables() {
     currentRowIndex.value = states.currentRowIndex
     solution.value = states.solution
     answerArray.value = states.answerArray
+    keyboardLocked = states.keyboardLocked
+    rowComplete = states.rowComplete
 
     words.forEach((row, i) => {
       row.forEach((letter, j) => {
