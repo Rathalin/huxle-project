@@ -84,11 +84,16 @@ module.exports = {
         wiggle: 'wiggle 2s ease-in-out infinite',
         'wiggle-fast': 'wiggle 1.5s ease-in-out infinite',
         'spin-slow': 'spin 5s linear infinite',
+        jump: 'jump 600ms 1',
       },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-2deg)' },
           '50%': { transform: 'rotate(2deg)' },
+        },
+        jump: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-30%)' },
         },
       },
     },

@@ -15,6 +15,7 @@ import { i18n } from '@/locales/i18n'
 import type { LetterStateOption } from '@/components/ui/main/game/board/letter-state'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import { useLocalStorageSupport } from '@/composables/LocalStorageSupport'
+import { useGameStore } from '@/stores/game.store'
 
 const invalidLinkDialogEl = ref<InstanceType<typeof InvalidLinkDialog>>()
 const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()
@@ -30,12 +31,12 @@ const {
 
 const currentRowIndex = ref(0)
 const currentRow = ref(0)
-const gameDone = ref(false)
 
 let keyboardLocked = false
 let rowComplete = false
 
 const { words, wordEN, wordDE } = useWordsStore()
+const gameStore = useGameStore()
 const solution =
   i18n.global.locale === 'en'
     ? ref(wordEN.toLowerCase())
@@ -63,7 +64,7 @@ window.addEventListener('keyup', keyBoardInput)
 
 onUnmounted(() => {
   window.removeEventListener('keyup', keyBoardInput)
-  if (!gameDone.value) {
+  if (gameStore.state === 'playing') {
     const stateObject = {
       currentRow: currentRow.value,
       currentRowIndex: currentRowIndex.value,
@@ -169,7 +170,7 @@ function checkWord() {
     words[currentRow.value].forEach((letter) => {
       letter[1] = 'correct'
     })
-    gameDone.value = true
+    gameStore.state = 'won'
     winnerDialogEl.value?.openDialog()
     stopTimer()
     clearLocalStorage()
@@ -190,7 +191,7 @@ function checkWord() {
       setKeyboardState(state, letter[0])
     })
     if (currentRow.value === 5) {
-      gameDone.value = true
+      gameStore.state = 'lost'
       loserDialogEl.value?.openDialog()
       stopTimer()
       clearLocalStorage()
@@ -252,7 +253,7 @@ defineEmits<{
     <Board />
     <Keyboard :letter-states="keyboardStates" @keyInput="pressedKey" />
     <PrimaryButton
-      v-if="gameDone"
+      v-if="gameStore.state === 'won'"
       class="mt-2 px-6"
       @click="statsDialogEl?.openDialog()"
     >
