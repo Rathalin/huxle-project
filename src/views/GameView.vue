@@ -22,7 +22,7 @@ const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()
 const loserDialogEl = ref<InstanceType<typeof LoserDialog>>()
 const statsDialogEl = ref<InstanceType<typeof StatsDialog>>()
 const resetWarningDialogEl = ref<InstanceType<typeof ResetWarningDialog>>()
-const { getTime, stopTimer, startTimer, resetTimer } = useTimer()
+const { getTime, stopTimer, resetTimer } = useTimer()
 const {
   initializeVariablesFromLocalStorage,
   saveVariablesToLocalStorage,
@@ -123,12 +123,14 @@ function initializeVariables() {
 }
 
 function pressedKey(letter: string) {
-  if (letter === 'Backspace') {
-    removeLetter()
-  } else if (letter === 'Enter') {
-    checkWord()
-  } else {
-    addLetter(letter.toLowerCase())
+  if (gameStore.state === 'playing') {
+    if (letter === 'Backspace') {
+      removeLetter()
+    } else if (letter === 'Enter') {
+      checkWord()
+    } else {
+      addLetter(letter.toLowerCase())
+    }
   }
 }
 
