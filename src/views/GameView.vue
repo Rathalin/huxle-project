@@ -81,7 +81,6 @@ onUnmounted(() => {
 
 onMounted(() => {
   resetTimer()
-  startTimer()
   checkValidLink()
   initializeVariables()
 })
