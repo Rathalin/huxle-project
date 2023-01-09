@@ -25,7 +25,7 @@ describe('Home.vue', () => {
       await createButton!.trigger('click')
     });
 
-    it('should mount GameView', async () => {
+    it('should show the correct letter in Game', async () => {
       // creating a Router for testing
       const router = createRouter({
         history: createWebHistory(),
@@ -35,8 +35,26 @@ describe('Home.vue', () => {
       router.push({ params: {wordEN: 'aGVsbG8=', wordDE: 'aGFsbG8='}})
       await router.isReady()
       const wrapper = mount(GameView as any,  { global: { plugins: [i18n, router] } });
-      // const createButton = wrapper.find('button')
-      // expect(createButton.text()).toContain('Enter')
+      const fieldButton = wrapper.find('.h-11')
+      const h_Button = wrapper.find('#h')
+      expect(h_Button.text()).toContain('h')
+      await h_Button!.trigger('click')
+      expect(fieldButton.text()).toContain('H')
+    });
+
+    it('should fail', async () => {
+      // creating a Router for testing
+      const router = createRouter({
+        history: createWebHistory(),
+        routes: routes,
+        
+      })
+      router.push({ params: {wordEN: 'aGVsbG8=', wordDE: 'aGFsbG8='}})
+      await router.isReady()
+      const wrapper = mount(GameView as any,  { global: { plugins: [i18n, router] } });
+      const fieldButton = wrapper.find('.h-11')
+      // the field should not contain a letter if no button has been pressed
+      expect(fieldButton.text()).toContain('H')
     });
 
   });

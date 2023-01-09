@@ -30,8 +30,6 @@ describe('LocaleSwitcher.vue', () => {
     // it should give the option to switch to "Deutsch" and be clickable
     expect(langButton.text()).toContain('Deutsch')
     await langButton!.trigger('click')
-    // expect(i18n.global.locale).toBe('de')
-    // expect(langButton.text()).toContain('English')
   })
 
 
