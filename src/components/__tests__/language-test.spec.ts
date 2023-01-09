@@ -1,14 +1,8 @@
-// component test
-// export default {} as never
-
 import { mount } from '@vue/test-utils'
 import LocaleSwitcher from '../ui/header/LocaleSwitcher.vue'
-import { describe, expect, test, it, beforeEach } from 'vitest'
+import { describe, expect, it, beforeEach } from 'vitest'
 import { i18n } from '../../locales/i18n'
 import { setActivePinia, createPinia } from 'pinia'
-import CreateView from '../../views/CreateView.vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from "../../router/router"
 
 describe('LocaleSwitcher.vue', () => {
   beforeEach(() => {

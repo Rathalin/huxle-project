@@ -7,7 +7,7 @@ import { i18n } from '../../locales/i18n';
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from "../../router/router"
 
-describe('Home.vue', () => {
+describe('Home.vue and GameView.vue', () => {
 
     beforeEach(() => {
         // creates a fresh pinia and make it active so it's automatically picked
