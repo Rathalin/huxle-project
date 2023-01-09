@@ -26,7 +26,7 @@ import Letter from '@/components/ui/main/game/board/InputLetter.vue'
     </div>
     <div class="inline">
       <span class="pr-2">
-        <RouterLink to="/create">
+        <RouterLink id="create" to="/create">
           <SecondaryButton>{{ $t('view.home.create') }}</SecondaryButton>
         </RouterLink>
       </span>

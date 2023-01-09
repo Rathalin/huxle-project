@@ -7,6 +7,8 @@ import { describe, expect, test, it, beforeEach } from 'vitest'
 import { i18n } from '../../locales/i18n'
 import { setActivePinia, createPinia } from 'pinia'
 import CreateView from '../../views/CreateView.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import { routes } from "../../router/router"
 
 describe('LocaleSwitcher.vue', () => {
   beforeEach(() => {
@@ -16,7 +18,7 @@ describe('LocaleSwitcher.vue', () => {
     setActivePinia(createPinia())
   })
 
-  test('should change current locale', async () => {
+  it('should show current locale', async () => {
     const wrapper = mount(LocaleSwitcher as any, {
       global: { plugins: [i18n] },
     })
@@ -31,4 +33,6 @@ describe('LocaleSwitcher.vue', () => {
     // expect(i18n.global.locale).toBe('de')
     // expect(langButton.text()).toContain('English')
   })
+
+
 })
