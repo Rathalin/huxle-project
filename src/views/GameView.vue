@@ -6,16 +6,16 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useWordsStore } from '@/stores/words.store'
 import { useTimer } from '@/composables/Timer'
-import type { Ref } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
 import { i18n } from '@/locales/i18n'
 import type { LetterStateOption } from '@/components/ui/main/game/board/letter-state'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import { useLocalStorageSupport } from '@/composables/LocalStorageSupport'
 import { useGameStore } from '@/stores/game.store'
+import { useRoute } from 'vue-router'
 
 const invalidLinkDialogEl = ref<InstanceType<typeof InvalidLinkDialog>>()
 const winnerDialogEl = ref<InstanceType<typeof WinnerDialog>>()
@@ -29,30 +29,61 @@ const {
   clearLocalStorage,
 } = useLocalStorageSupport()
 
-const currentRowIndex = ref(0)
-const currentRow = ref(0)
-
-let keyboardLocked = false
-let rowComplete = false
-
-const { words, wordEN, wordDE } = useWordsStore()
+const wordStore = useWordsStore()
 const gameStore = useGameStore()
+
+const route = useRoute()
+// the words will be encoded and decoded using Base64
+const wordEN = ref(atob(route.params.wordEN.toString()))
+const wordDE = ref(atob(route.params.wordDE.toString()))
+
 const solution =
   i18n.global.locale === 'en'
-    ? ref(wordEN.toLowerCase())
-    : ref(wordDE.toLowerCase())
-
-const keyboardStates = reactive<Record<string, LetterStateOption>>({})
-const answerArray = ref<(string | null)[]>(solution.value.split(''))
+    ? ref(wordEN.value.toLowerCase())
+    : ref(wordDE.value.toLowerCase())
 
 const localeStore = useLocaleStore()
 localeStore.$subscribe(
   (_, state) =>
     (solution.value =
       state.selectedLocale === 'en'
-        ? wordEN.toLowerCase()
-        : wordDE.toLowerCase())
+        ? wordEN.value.toLowerCase()
+        : wordDE.value.toLowerCase())
 )
+
+gameStore.$subscribe((_, state) => {
+  if (gameStore.state === 'playing') {
+    const stateObject = {
+      currentRow: gameStore.currentRow,
+      currentRowIndex: gameStore.currentRowIndex,
+      words: wordStore.words,
+      solution: solution.value,
+      keyboardStates: gameStore.keyboardStates,
+      answerArray: answerArray,
+      keyboardLocked: gameStore.keyboardLocked,
+      rowComplete: gameStore.rowComplete,
+    }
+    saveVariablesToLocalStorage(stateObject)
+  }
+})
+
+wordStore.$subscribe((_, state) => {
+  if (gameStore.state === 'playing') {
+    const stateObject = {
+      currentRow: gameStore.currentRow,
+      currentRowIndex: gameStore.currentRowIndex,
+      words: wordStore.words,
+      solution: solution.value,
+      keyboardStates: gameStore.keyboardStates,
+      answerArray: answerArray,
+      keyboardLocked: gameStore.keyboardLocked,
+      rowComplete: gameStore.rowComplete,
+    }
+    saveVariablesToLocalStorage(stateObject)
+  }
+})
+
+const answerArray = ref<(string | null)[]>(solution.value.split(''))
 
 const keyBoardInput = (e: KeyboardEvent) => {
   const alphaRegex = /^[A-Za-z]$/
@@ -64,19 +95,6 @@ window.addEventListener('keyup', keyBoardInput)
 
 onUnmounted(() => {
   window.removeEventListener('keyup', keyBoardInput)
-  if (gameStore.state === 'playing') {
-    const stateObject = {
-      currentRow: currentRow.value,
-      currentRowIndex: currentRowIndex.value,
-      words: words,
-      solution: solution.value,
-      keyboardStates: keyboardStates,
-      answerArray: answerArray.value,
-      keyboardLocked: keyboardLocked,
-      rowComplete: rowComplete,
-    }
-    saveVariablesToLocalStorage(stateObject)
-  }
 })
 
 onMounted(() => {
@@ -85,14 +103,21 @@ onMounted(() => {
   initializeVariables()
 })
 
-const guesses = computed(() => Math.min(currentRow.value + 1, 6))
+watch(solution, (currentValue, oldValue) => {
+  answerArray.value = currentValue.split('')
+})
+
+const guesses = computed(() => Math.min(gameStore.currentRow + 1, 6))
 
 function checkValidLink() {
   const specialCharacters = /[`!@#$%^&*()_+\-=\\|,.<>?~]/
-  if (wordEN.length !== 5 || wordDE.length !== 5) {
+  if (wordEN.value.length !== 5 || wordDE.value.length !== 5) {
     invalidLinkDialogEl.value?.openDialog()
   }
-  if (specialCharacters.test(wordEN) || specialCharacters.test(wordDE)) {
+  if (
+    specialCharacters.test(wordEN.value) ||
+    specialCharacters.test(wordDE.value)
+  ) {
     invalidLinkDialogEl.value?.openDialog()
   }
 }
@@ -101,23 +126,26 @@ function initializeVariables() {
   const localStorageResult = initializeVariablesFromLocalStorage()
   if (localStorageResult) {
     const states = JSON.parse(localStorageResult)
-    if (states.solution === solution) {
-      currentRow.value = states.currentRow
-      currentRowIndex.value = states.currentRowIndex
+    if (states.solution === solution.value) {
+      gameStore.currentRow = states.currentRow
+      gameStore.currentRowIndex = states.currentRowIndex
       solution.value = states.solution
       answerArray.value = states.answerArray
-      keyboardLocked = states.keyboardLocked
-      rowComplete = states.rowComplete
+      gameStore.keyboardLocked = states.keyboardLocked
+      gameStore.rowComplete = states.rowComplete
 
-      words.forEach((row, i) => {
+      wordStore.words.forEach((row, i) => {
         row.forEach((letter, j) => {
           letter[0] = states.words[i][j][0]
           letter[1] = states.words[i][j][1]
         })
       })
 
-      for (let letter in Object.keys(keyboardStates)) {
-        setKeyboardState(Object.values(keyboardStates)[letter], letter)
+      for (let letter in Object.keys(gameStore.keyboardStates)) {
+        setKeyboardState(
+          Object.values(gameStore.keyboardStates)[letter],
+          letter
+        )
       }
     }
   }
@@ -137,40 +165,40 @@ function pressedKey(letter: string) {
 }
 
 function addLetter(letter: string) {
-  if (keyboardLocked) {
+  if (gameStore.keyboardLocked) {
     return
   }
-  words[currentRow.value][currentRowIndex.value][0] = letter
-  currentRowIndex.value++
-  if (currentRowIndex.value == 5) {
-    keyboardLocked = true
-    rowComplete = true
+  wordStore.words[gameStore.currentRow][gameStore.currentRowIndex][0] = letter
+  gameStore.currentRowIndex++
+  if (gameStore.currentRowIndex == 5) {
+    gameStore.keyboardLocked = true
+    gameStore.rowComplete = true
   }
 }
 
 function removeLetter() {
-  if (currentRowIndex.value === 5) {
-    keyboardLocked = false
-    rowComplete = false
+  if (gameStore.currentRowIndex === 5) {
+    gameStore.keyboardLocked = false
+    gameStore.rowComplete = false
   }
-  if (currentRowIndex.value === 0) {
+  if (gameStore.currentRowIndex === 0) {
     return
   }
-  words[currentRow.value][currentRowIndex.value - 1][0] = ' '
-  currentRowIndex.value--
+  wordStore.words[gameStore.currentRow][gameStore.currentRowIndex - 1][0] = ' '
+  gameStore.currentRowIndex--
 }
 
 function checkWord() {
-  if (!rowComplete) {
+  if (!gameStore.rowComplete) {
     return
   }
   const word: string[] = []
   answerArray.value = solution.value.split('')
-  words[currentRow.value].forEach((letter) => {
+  wordStore.words[gameStore.currentRow].forEach((letter) => {
     word.push(letter[0])
   })
   if (word.join('') === solution.value) {
-    words[currentRow.value].forEach((letter) => {
+    wordStore.words[gameStore.currentRow].forEach((letter) => {
       letter[1] = 'correct'
     })
     gameStore.state = 'won'
@@ -183,17 +211,17 @@ function checkWord() {
     }, 2000)
   } else {
     let state: LetterStateOption = 'absent'
-    words[currentRow.value].forEach((letter, index) => {
+    wordStore.words[gameStore.currentRow].forEach((letter, index) => {
       state = checkCorrect(letter[0], index)
       letter[1] = state
       setKeyboardState(state, letter[0])
     })
-    words[currentRow.value].forEach((letter) => {
+    wordStore.words[gameStore.currentRow].forEach((letter) => {
       state = checkPresent(letter)
       letter[1] = state
       setKeyboardState(state, letter[0])
     })
-    if (currentRow.value === 5) {
+    if (gameStore.currentRow === 5) {
       gameStore.state = 'lost'
       loserDialogEl.value?.openDialog()
       stopTimer()
@@ -203,10 +231,10 @@ function checkWord() {
         statsDialogEl.value?.openDialog()
       }, 2000)
     }
-    keyboardLocked = false
-    rowComplete = false
-    currentRow.value++
-    currentRowIndex.value = 0
+    gameStore.keyboardLocked = false
+    gameStore.rowComplete = false
+    gameStore.currentRow++
+    gameStore.currentRowIndex = 0
   }
 }
 
@@ -237,12 +265,13 @@ function checkCorrect(letter: string, position: number) {
 
 function setKeyboardState(state: LetterStateOption, letter: string) {
   if (
-    (keyboardStates[letter] && keyboardStates[letter] === 'correct') ||
-    (keyboardStates[letter] && state === 'absent')
+    (gameStore.keyboardStates[letter] &&
+      gameStore.keyboardStates[letter] === 'correct') ||
+    (gameStore.keyboardStates[letter] && state === 'absent')
   ) {
     return
   } else {
-    keyboardStates[letter] = state
+    gameStore.keyboardStates[letter] = state
   }
 }
 
@@ -254,7 +283,10 @@ defineEmits<{
 <template>
   <div class="flex flex-col items-center lg:mt-6">
     <Board />
-    <Keyboard :letter-states="keyboardStates" @keyInput="pressedKey" />
+    <Keyboard
+      :letter-states="gameStore.keyboardStates"
+      @keyInput="pressedKey"
+    />
     <PrimaryButton
       v-if="gameStore.state === 'won'"
       class="mt-2 px-6"

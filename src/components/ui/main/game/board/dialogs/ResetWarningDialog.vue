@@ -4,12 +4,21 @@ import SecondaryButton from '@/components/ui/buttons/SecondaryButton.vue'
 import BasicDialog from '@/components/ui/dialogs/BasicDialog.vue'
 import { ref } from 'vue'
 import { useLocaleStore } from '@/stores/locale.store'
+import { useLocalStorageSupport } from '@/composables/LocalStorageSupport'
+import { useGameStore } from '@/stores/game.store'
+import { useWordsStore } from '@/stores/words.store'
 
 const dialogEl = ref<InstanceType<typeof BasicDialog>>()
 const { toggleLocale } = useLocaleStore()
+const { clearLocalStorage } = useLocalStorageSupport()
+const gameStore = useGameStore()
+const wordStore = useWordsStore()
 
 function onConfirmClick(_e: Event) {
   toggleLocale()
+  clearLocalStorage()
+  gameStore.$reset()
+  wordStore.$reset()
   dialogEl.value?.closeDialog()
 }
 
