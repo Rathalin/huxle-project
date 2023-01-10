@@ -10,7 +10,9 @@ export const useGameStore = defineStore('game', () => {
   const keyboardLocked = ref(false)
   const rowComplete = ref(false)
 
-  const keyboardStates = reactive<Record<string, LetterStateOption>>({})
+  const keyboardStates = reactive({
+    keys: new Map<string, LetterStateOption>([]),
+  })
 
   return {
     state,

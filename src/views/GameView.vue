@@ -51,11 +51,11 @@ localeStore.$subscribe(
         : wordDE.value.toLowerCase())
 )
 
-gameStore.$subscribe((_, state) => {
+gameStore.$subscribe(() => {
   saveGameStates()
 })
 
-wordStore.$subscribe((_, state) => {
+wordStore.$subscribe(() => {
   saveGameStates()
 })
 
@@ -94,7 +94,7 @@ onMounted(() => {
   initializeVariables()
 })
 
-watch(solution, (currentValue, oldValue) => {
+watch(solution, (currentValue) => {
   answerArray.value = currentValue.split('')
 })
 
@@ -256,13 +256,13 @@ function checkCorrect(letter: string, position: number) {
 
 function setKeyboardState(state: LetterStateOption, letter: string) {
   if (
-    (gameStore.keyboardStates[letter] &&
-      gameStore.keyboardStates[letter] === 'correct') ||
-    (gameStore.keyboardStates[letter] && state === 'absent')
+    (gameStore.keyboardStates.keys.has(letter) &&
+      gameStore.keyboardStates.keys.get(letter) === 'correct') ||
+    (gameStore.keyboardStates.keys.get(letter) && state === 'absent')
   ) {
     return
   } else {
-    gameStore.keyboardStates[letter] = state
+    gameStore.keyboardStates.keys.set(letter, state)
   }
 }
 
@@ -275,7 +275,7 @@ defineEmits<{
   <div class="flex flex-col items-center lg:mt-6">
     <Board />
     <Keyboard
-      :letter-states="gameStore.keyboardStates"
+      :letter-states="gameStore.keyboardStates.keys"
       @keyInput="pressedKey"
     />
     <PrimaryButton

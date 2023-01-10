@@ -2,7 +2,7 @@
 import KeyButton from './KeyButton.vue'
 
 const props = defineProps<{
-  letterStates: Record<string, string>
+  letterStates: Map<string, string>
 }>()
 
 defineEmits<{
@@ -29,7 +29,9 @@ const rows = [
         :key="letter"
         :keyChar="letter"
         :state="
-          props.letterStates[letter] ? props.letterStates[letter] : 'unset'
+          props.letterStates.has(letter)
+            ? props.letterStates.get(letter)
+            : 'unset'
         "
         @key="$emit('keyInput', letter)"
       />
