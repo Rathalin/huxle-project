@@ -40,7 +40,8 @@
         },
         "error": {
           "required": "Diese Feld ist verpflichtend.",
-          "length": "Das Word muss {length} Buchstaben haben."
+          "length": "Das Wort muss {length} Buchstaben haben.",
+          "onlyLetters": "Das Wort darf nur aus Buchstaben bestehen."
         }
       },
       "submit": {

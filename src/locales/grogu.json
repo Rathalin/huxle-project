@@ -48,7 +48,9 @@
         },
         "error": {
           "required": "Hrrmmm. Required this field is.",
-          "length": "Have {length} letters the word must."
+          "length": "Have {length} letters the word must.",
+          "onlyLetters": "Only letters the word can have."
+
         }
       },
       "submit": {
