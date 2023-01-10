@@ -10,6 +10,7 @@ export const localeOptions: LocaleOption[] = [defaultLocale, 'de']
 
 export const i18n = createI18n({
   locale: defaultLocale,
+  globalInjection: true,
   fallbackLocale: 'en',
   messages: {
     en,

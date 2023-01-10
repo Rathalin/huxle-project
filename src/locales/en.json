@@ -73,12 +73,36 @@
           "content": "Sorry, the given link is invalid."
         },
         "loser": {
-          "content": "Unlucky. It's clearly the creators fault.",
-          "heading": "😦"
+          "heading": "😦",
+          "content": "Unlucky. It's clearly the creators fault."
         },
         "winner": {
-          "content": "Nice!",
-          "heading": "🥳"
+          "guesses": {
+            "one": {
+              "heading": "😏",
+              "content": "You're not cheating, are you?"
+            },
+            "two": {
+              "heading": "🤯",
+              "content": "Genius!"
+            },
+            "three": {
+              "heading": "😁",
+              "content": "Very good!"
+            },
+            "four": {
+              "heading": "😊",
+              "content": "Nice!"
+            },
+            "five": {
+              "heading": "🙂",
+              "content": "Not bad!"
+            },
+            "six": {
+              "heading": "🤷‍♀️",
+              "content": "Well, you got it and that's all that matters, right?"
+            }
+          }
         },
         "stats": {
           "copied": "Copied!",

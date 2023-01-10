@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
-
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import type { UserConfig as VitestUserConfigInterface } from 'vitest/config';

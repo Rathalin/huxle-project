@@ -18,12 +18,12 @@ module.exports = {
         light: {
           letter: {
             unset: {
-              normal: 'hsl(200, 5%, 65%)',
-              hover: 'hsl(200, 5%, 60%)',
-            },
-            absent: {
               normal: 'hsl(0, 3%, 60%)',
               hover: 'hsl(0, 3%, 55%)',
+            },
+            absent: {
+              normal: 'hsl(200, 5%, 65%)',
+              hover: 'hsl(200, 5%, 60%)',
             },
             present: {
               normal: 'hsl(60, 80%, 48%)',
@@ -41,12 +41,12 @@ module.exports = {
         dark: {
           letter: {
             unset: {
-              normal: 'hsl(0, 0%, 40%)',
-              hover: 'hsl(0, 0%, 50%)',
-            },
-            absent: {
               normal: 'hsl(0, 0%, 20%)',
               hover: 'hsl(0, 0%, 30%)',
+            },
+            absent: {
+              normal: 'hsl(0, 0%, 40%)',
+              hover: 'hsl(0, 0%, 50%)',
             },
             present: {
               normal: 'hsl(60, 62%, 29%)',
@@ -84,11 +84,16 @@ module.exports = {
         wiggle: 'wiggle 2s ease-in-out infinite',
         'wiggle-fast': 'wiggle 1.5s ease-in-out infinite',
         'spin-slow': 'spin 5s linear infinite',
+        jump: 'jump 600ms 1',
       },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-2deg)' },
           '50%': { transform: 'rotate(2deg)' },
+        },
+        jump: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-30%)' },
         },
       },
     },

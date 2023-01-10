@@ -74,7 +74,33 @@
         },
         "winner": {
           "content": "Nice, you did!",
-          "heading": "🥳"
+          "heading": "🥳",
+          "guesses": {
+            "one": {
+              "heading": "😏",
+              "content": "Cheating you are not, you are?"
+            },
+            "two": {
+              "heading": "🤯",
+              "content": "Genius!"
+            },
+            "three": {
+              "heading": "😁",
+              "content": "Very good!"
+            },
+            "four": {
+              "heading": "😊",
+              "content": "Marvelous!"
+            },
+            "five": {
+              "heading": "🙂",
+              "content": "Not bad, you are!"
+            },
+            "six": {
+              "heading": "🤷‍♀️",
+              "content": "That in the end you got it and is all that matters, right?"
+            }
+          }
         },
         "loser": {
           "content": "Unlucky this was. Time to blame the creator it is, hm?",

@@ -2,9 +2,15 @@ import { useStopwatch } from 'vue-timer-hook'
 
 const stopwatch = useStopwatch()
 
+function addLeadingZero(value: number) {
+  return value < 10 ? `0${value}` : value
+}
+
 export function useTimer() {
   function getTime() {
-    return stopwatch.minutes.value + ':' + stopwatch.seconds.value
+    return `${addLeadingZero(stopwatch.minutes.value)}:${addLeadingZero(
+      stopwatch.seconds.value
+    )}`
   }
 
   function stopTimer() {
