@@ -28,11 +28,7 @@ const rows = [
         v-for="letter in row"
         :key="letter"
         :keyChar="letter"
-        :state="
-          props.letterStates.has(letter)
-            ? props.letterStates.get(letter)
-            : 'unset'
-        "
+        :state="props.letterStates.get(letter) ?? 'unset'"
         @key="$emit('keyInput', letter)"
       />
     </div>
