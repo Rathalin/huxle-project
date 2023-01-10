@@ -78,7 +78,33 @@
         },
         "winner": {
           "content": "Super!",
-          "heading": "🥳"
+          "heading": "🥳",
+          "guesses": {
+            "one": {
+              "heading": "😏",
+              "content": "Du schummelst eh nicht oder?"
+            },
+            "two": {
+              "heading": "🤯",
+              "content": "Genie!"
+            },
+            "three": {
+              "heading": "😁",
+              "content": "Super!"
+            },
+            "four": {
+              "heading": "😊",
+              "content": "Toll!"
+            },
+            "five": {
+              "heading": "🙂",
+              "content": "Nicht schlecht!"
+            },
+            "six": {
+              "heading": "🤷‍♀️",
+              "content": "Naja, du hast es geschafft und das ist alles, was zählt."
+            }
+          }
         },
         "stats": {
           "copied": "Kopiert!",

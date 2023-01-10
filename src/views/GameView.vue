@@ -6,7 +6,7 @@ import ResetWarningDialog from '@/components/ui/main/game/board/dialogs/ResetWar
 import WinnerDialog from '@/components/ui/main/game/board/dialogs/WinnerDialog.vue'
 import Keyboard from '@/components/ui/main/game/keyboard/InputKeyboard.vue'
 import StatsDialog from '@/components/ui/main/game/stats/StatsDialog.vue'
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useWordsStore } from '@/stores/words.store'
 import { useTimer } from '@/composables/Timer'
 import type { Ref } from 'vue'
@@ -84,6 +84,8 @@ onMounted(() => {
   checkValidLink()
   initializeVariables()
 })
+
+const guesses = computed(() => currentRow.value + 1)
 
 function checkValidLink() {
   const specialCharacters = /[`!@#$%^&*()_+\-=\\|,.<>?~]/
@@ -262,13 +264,9 @@ defineEmits<{
     </PrimaryButton>
 
     <InvalidLinkDialog ref="invalidLinkDialogEl" />
-    <WinnerDialog ref="winnerDialogEl" />
+    <WinnerDialog ref="winnerDialogEl" :guesses="guesses" />
     <LoserDialog ref="loserDialogEl" />
-    <StatsDialog
-      ref="statsDialogEl"
-      :guesses="currentRow + 1"
-      :time="getTime()"
-    />
+    <StatsDialog ref="statsDialogEl" :guesses="guesses" :time="getTime()" />
     <ResetWarningDialog ref="resetWarningDialogEl" />
   </div>
 </template>
