@@ -1,6 +1,6 @@
 import { mount  } from '@vue/test-utils'
 import CreateView from '../../views/CreateView.vue'
-import { describe, expect, test, it, beforeEach } from 'vitest';
+import { describe, expect, test, beforeEach } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia'
 import { i18n } from '../../locales/i18n';
 

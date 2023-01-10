@@ -64,6 +64,6 @@ defineExpose({
     <template v-slot:header>
       <span class="text-4xl">{{ winnerMessage.heading }}</span>
     </template>
-    <div>{{ winnerMessage.content }}</div>
+    <div id="message">{{ winnerMessage.content }}</div>
   </BasicDialog>
 </template>
