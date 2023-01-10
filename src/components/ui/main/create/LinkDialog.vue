@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 import IconButton from '@/components/ui/buttons/IconButton.vue'
-import TextInput from '@/components/ui/form/TextInput.vue'
 import BasicDialog from '../../dialogs/BasicDialog.vue'
 import TextDisplay from '../../form/TextDisplay.vue'
 

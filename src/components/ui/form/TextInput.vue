@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref } from '@vue/reactivity'
-
-const props = defineProps<{
+defineProps<{
   modelValue: string
   id?: string
   name?: string
@@ -35,7 +33,7 @@ function onInputChange(e: Event) {
       v-if="errors != null && errors.length > 0"
       class="flex flex-col text-sm text-light-error dark:text-dark-error"
     >
-      <div v-for="error of errors">{{ error }}</div>
+      <div v-for="error of errors" :key="error">{{ error }}</div>
     </div>
   </div>
 </template>

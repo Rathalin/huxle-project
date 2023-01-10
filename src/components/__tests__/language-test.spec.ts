@@ -25,6 +25,4 @@ describe('LocaleSwitcher.vue', () => {
     expect(langButton.text()).toContain('Deutsch')
     await langButton!.trigger('click')
   })
-
-
 })

@@ -7,10 +7,10 @@ import NavButton from './NavButton.vue'
   <RouterLink to="/">
     <NavButton>
       <div class="hidden sm:flex">
-        <LogoText class="text-2xl margin-fix" />
+        <LogoText class="margin-fix text-2xl" />
       </div>
       <div class="flex sm:hidden">
-        <i class="text-2xl leading-tight p-0 material-icons">home</i>
+        <i class="material-icons p-0 text-2xl leading-tight">home</i>
       </div>
     </NavButton>
   </RouterLink>

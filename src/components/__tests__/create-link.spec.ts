@@ -1,21 +1,19 @@
-import { mount  } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import CreateView from '../../views/CreateView.vue'
-import { describe, expect, test, beforeEach } from 'vitest';
+import { describe, expect, test, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { i18n } from '../../locales/i18n';
-
+import { i18n } from '../../locales/i18n'
 
 describe('CreateView.vue', () => {
+  beforeEach(() => {
+    // creates a fresh pinia and make it active so it's automatically picked
+    // up by any useStore() call without having to pass it to it:
+    // `useStore(pinia)`
+    setActivePinia(createPinia())
+  })
 
-    beforeEach(() => {
-        // creates a fresh pinia and make it active so it's automatically picked
-        // up by any useStore() call without having to pass it to it:
-        // `useStore(pinia)`
-        setActivePinia(createPinia())
-      })
-
-    test('the entered words are being checked for correctness', async () => {
-    const wrapper = mount(CreateView as any,  { global: { plugins: [i18n] } });
+  test('the entered words are being checked for correctness', async () => {
+    const wrapper = mount(CreateView as any, { global: { plugins: [i18n] } })
     // the page should have two input fields
     const inputFields = await wrapper.findAll('input')
     const engInput = inputFields[0]
@@ -30,5 +28,5 @@ describe('CreateView.vue', () => {
     // when entering a word the length is important
     deInput.setValue('water')
     expect(deInput.element.value).toHaveLength(5)
-    });
-  });
+  })
+})

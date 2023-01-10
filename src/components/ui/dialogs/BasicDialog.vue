@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 import IconButton from '@/components/ui/buttons/IconButton.vue'
 
 withDefaults(
