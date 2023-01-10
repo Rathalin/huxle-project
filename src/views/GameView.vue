@@ -42,8 +42,8 @@ const solution =
     ? ref(wordEN.toLowerCase())
     : ref(wordDE.toLowerCase())
 
-const keyboardStates: Record<string, LetterStateOption> = reactive({})
-const answerArray: Ref<(string | null)[]> = ref(solution.value.split(''))
+const keyboardStates = reactive<Record<string, LetterStateOption>>({})
+const answerArray = ref<(string | null)[]>(solution.value.split(''))
 
 const localeStore = useLocaleStore()
 localeStore.$subscribe(
@@ -85,7 +85,7 @@ onMounted(() => {
   initializeVariables()
 })
 
-const guesses = computed(() => currentRow.value + 1)
+const guesses = computed(() => Math.min(currentRow.value + 1, 6))
 
 function checkValidLink() {
   const specialCharacters = /[`!@#$%^&*()_+\-=\\|,.<>?~]/
