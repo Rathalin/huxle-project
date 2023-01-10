@@ -6,6 +6,9 @@ Andrea Haider-Pachtrog S2110629009
 Daniel Flockert S2110629004
 Lisa Lamplmair S2110629010
 
+## Test Huxle
+https://huxle-rathalin.vercel.app/ to try out and play with your friends
+
 ## Project Setup
 
 ```sh

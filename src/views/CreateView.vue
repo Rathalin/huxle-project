@@ -4,7 +4,7 @@ import LogoText from '@/components/ui/logo/LogoText.vue'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton.vue'
 import LinkDialog from '@/components/ui/main/create/LinkDialog.vue'
 import { computed, ref, reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { i18n } from '@/locales/i18n'
 
 const HOST_URL = import.meta.env.VITE_HOST_URL ?? 'http://127.0.0.1:5173/'
 
@@ -24,9 +24,29 @@ const validate = ref(false)
 
 function openDialog() {
   validate.value = true
-  if (formState.wordEN.length == 5 && formState.wordDE.length == 5) {
+  if (
+    verifyWord(formState.wordEN).length === 0 &&
+    verifyWord(formState.wordDE).length === 0
+  ) {
     linkDialogEl.value?.openDialog()
   }
+}
+
+function verifyWord(word: string) {
+  let errors: string[]
+  errors = []
+
+  if (word.length == 0) {
+    errors.push(i18n.global.t('view.create.input.error.required'))
+  } else if (word.length !== 5) {
+    errors.push(i18n.global.t('view.create.input.error.length', { length: 5 }))
+  }
+
+  if (!/^[a-zA-Z]+$/.test(word)) {
+    errors.push(i18n.global.t('view.create.input.error.onlyLetters'))
+  }
+
+  return errors
 }
 </script>
 
@@ -42,29 +62,13 @@ function openDialog() {
       :label="$t('view.create.input.en.label')"
       class="mb-2"
       v-model="formState.wordEN"
-      :errors="
-        formState.wordEN.length == 5 || !validate
-          ? []
-          : [
-              formState.wordEN.length == 0
-                ? $t('view.create.input.error.required')
-                : $t('view.create.input.error.length', { length: 5 }),
-            ]
-      "
+      :errors="!validate ? [] : verifyWord(formState.wordEN)"
     />
     <TextInput
       :label="$t('view.create.input.de.label')"
       class="mb-2"
       v-model="formState.wordDE"
-      :errors="
-        formState.wordDE.length == 5 || !validate
-          ? []
-          : [
-              formState.wordDE.length == 0
-                ? $t('view.create.input.error.required')
-                : $t('view.create.input.error.length', { length: 5 }),
-            ]
-      "
+      :errors="!validate ? [] : verifyWord(formState.wordDE)"
     />
 
     <PrimaryButton @click="openDialog" class="mt-4 px-7">{{

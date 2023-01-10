@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <span
-    class="absolute select-none pointer-events-none"
+    class="pointer-events-none absolute select-none"
     :style="{
       left: `${x}%`,
       top: `${y}%`,

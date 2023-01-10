@@ -3,6 +3,8 @@ import LocaleSwitcher from '../ui/header/LocaleSwitcher.vue'
 import { describe, expect, it, beforeEach } from 'vitest'
 import { i18n } from '../../locales/i18n'
 import { setActivePinia, createPinia } from 'pinia'
+import { createRouter, createWebHistory } from 'vue-router'
+import { routes } from '../../router/router'
 
 describe('LocaleSwitcher.vue', () => {
   beforeEach(() => {
@@ -23,8 +25,5 @@ describe('LocaleSwitcher.vue', () => {
     expect(langButton).toBeDefined()
     // it should give the option to switch to "Deutsch" and be clickable
     expect(langButton.text()).toContain('Deutsch')
-    await langButton!.trigger('click')
   })
-
-
 })

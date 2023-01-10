@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useLocaleStore } from '@/stores/locale.store'
-import DebugButton from '../buttons/DebugButton.vue'
 
 const { activateSecretGroguLocale } = useLocaleStore()
 </script>
