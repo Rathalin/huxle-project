@@ -66,7 +66,7 @@ function saveGameStates() {
       currentRowIndex: gameStore.currentRowIndex,
       words: wordStore.words,
       solution: solution.value,
-      keyboardStates: gameStore.keyboardStates,
+      keyboardStates: Array.from(gameStore.keyboardStates.keys.entries()),
       answerArray: answerArray,
       keyboardLocked: gameStore.keyboardLocked,
       rowComplete: gameStore.rowComplete,
@@ -131,13 +131,7 @@ function initializeVariables() {
           letter[1] = states.words[i][j][1]
         })
       })
-
-      for (let letter in Object.keys(gameStore.keyboardStates)) {
-        setKeyboardState(
-          Object.values(gameStore.keyboardStates)[letter],
-          letter
-        )
-      }
+      gameStore.keyboardStates.keys = new Map(states.keyboardStates)
     }
   }
   clearLocalStorage()
