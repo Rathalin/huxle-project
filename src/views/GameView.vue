@@ -52,22 +52,14 @@ localeStore.$subscribe(
 )
 
 gameStore.$subscribe((_, state) => {
-  if (gameStore.state === 'playing') {
-    const stateObject = {
-      currentRow: gameStore.currentRow,
-      currentRowIndex: gameStore.currentRowIndex,
-      words: wordStore.words,
-      solution: solution.value,
-      keyboardStates: gameStore.keyboardStates,
-      answerArray: answerArray,
-      keyboardLocked: gameStore.keyboardLocked,
-      rowComplete: gameStore.rowComplete,
-    }
-    saveVariablesToLocalStorage(stateObject)
-  }
+  saveGameStates()
 })
 
 wordStore.$subscribe((_, state) => {
+  saveGameStates()
+})
+
+function saveGameStates() {
   if (gameStore.state === 'playing') {
     const stateObject = {
       currentRow: gameStore.currentRow,
@@ -81,10 +73,9 @@ wordStore.$subscribe((_, state) => {
     }
     saveVariablesToLocalStorage(stateObject)
   }
-})
+}
 
 const answerArray = ref<(string | null)[]>(solution.value.split(''))
-
 const keyBoardInput = (e: KeyboardEvent) => {
   const alphaRegex = /^[A-Za-z]$/
   if (alphaRegex.test(e.key) || e.key === 'Backspace' || e.key === 'Enter') {
